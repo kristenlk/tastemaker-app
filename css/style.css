@@ -1,0 +1,19 @@
+body {
+    margin-top: 50px;
+    background: url('../img/main-bg.jpeg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    margin-top: 100px;
+    padding: 0;
+    font-size: 7em;
+    font-family: 'Enriqueta', serif;
+    color: #FFF;
+}
