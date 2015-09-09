@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="tastemakerApp">
 
 <head>
 
@@ -24,12 +24,6 @@
 
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <h1>T A S T E M A K E R</h1>
-  </header>
-
-
   <!-- Navigation -->
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -40,7 +34,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Tastemaker</a>
+        <a class="navbar-brand" href="/#/">Tastemaker</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -56,16 +50,31 @@
     </div>
   </nav>
 
+  <div ng-view></div>
+
   <!-- jQuery -->
-  <script src="js/jquery.js"></script>
+  <script src="node_modules/jquery/dist/jquery.js"></script>
 
   <!-- Bootstrap Core JavaScript -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <!-- AngularJS -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+
+  <!-- App -->
+  <script src='app/app.js'></script>
+
+  <!-- Services -->
+  <script src='app/services/values.js'></script>
+
+  <!-- Factories -->
+  <script src='app/services/findRestaurantFactory.js'></script>
+
+  <!-- Controllers -->
+  <script src='app/controllers/findRestaurantController.js'></script>
+
 
 </body>
 
