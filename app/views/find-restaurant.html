@@ -1,0 +1,18 @@
+<!-- ng switch statement that switches on the value of the form phase in the controller - when 1, show html for that page -->
+<h1>{{findRstCtrl.formPhase}}</h1>
+    <button ng-click="findRstCtrl.nextPhase()">Next</button>
+    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
+<div ng-switch="findRstCtrl.formPhase">
+
+  <div ng-switch-when="1">
+    <button ng-click="findRstCtrl.nextPhase">Next</button>
+    <button ng-click="findRstCtrl.previousPhase">Previous</button>
+  </div>
+<!--   <div ng-switch-when="1">
+    <button ng-click="findRstCtrl.nextPhase">Next</button>
+    <button ng-click="findRstCtrl.previousPhase">Previous</button>
+  </div>
+  <div ng-switch-when="2">
+    <button ng-click="findRstCtrl.previousPhase">Previous</button>
+  </div> -->
+</div>
