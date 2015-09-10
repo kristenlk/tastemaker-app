@@ -12,8 +12,8 @@
     };
 
     // factory.getRestaurant = function(restaurantId){
-    //   go through factory.restaurantMatches, sort by rating, get top restaurant.
-    //   if user has selected to view the next one, get the next highest rated restaurant
+      //
+
     // }
 
     return factory;
