@@ -8,7 +8,7 @@
     <h1>{{findRstCtrl.formPhase}}</h1>
 <!--     <p>Detecting your location...</p> -->
     <button ng-click="findRstCtrl.previousPhase()">Previous</button>
-    <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.setMap()">Next</button>
+    <button ng-click="findRstCtrl.nextPhase()">Next</button>
   </div>
 
 <!-- Location verification / map -->
@@ -17,7 +17,13 @@
 <!--     <button ng-click="findRstCtrl.previousPhase">Previous</button> -->
     <p>Location detected</p>
 
-    <ui-gmap-google-map center='findRstCtrl.map.center' zoom='findRstCtrl.map.zoom'></ui-gmap-google-map>
+    <ui-gmap-google-map center='findRstCtrl.map.center' zoom='findRstCtrl.map.zoom'>
+      <ui-gmap-markers
+          models="findRstCtrl.mylocation"
+          coords="'self'"
+          >
+      </ui-gmap-markers>
+    </ui-gmap-google-map>
 
     <button ng-click="findRstCtrl.previousPhase()">Previous</button>
     <button ng-click="findRstCtrl.nextPhase()">Next</button>

@@ -84,17 +84,33 @@
           },
           zoom: areaZoom
         };
-          vm.options = {
-            scrollwheel: false
-          };
-        });
+        vm.options = {
+          scrollwheel: false
+        };
 
+        vm.mylocation = [
+          { id: 1,
+          latitude: vm.pos.latitude,
+          longitude: vm.pos.longitude,
+          title: 'my location'
+          }
+        ];
       });
-    }
+
+      // var latlng = new google.maps.LatLng(vm.pos.latitude, vm.pos.longitude);
+
+      // var marker = new google.maps.Marker({
+      //   map: vm.map,
+      //   position: latlng
+      // });
+
+
+    });
+  }
 
     init();
 
-    vm.currentRestaurant // start at 0
+    vm.currentRestaurant; // start at 0
     // increment with button press
     // vm.getRestaurants(vm.currentRestaurant)
 
@@ -110,9 +126,11 @@
       findRestaurantFactory.getRestaurants(url)
         .then(function(response){
           vm.restaurants = response.data.businesses;
+          // then get restaurant
         }, function(data, status, headers, config){
           console.log('Error getting restaurants.');
         });
+
       // http://localhost:3000/restaurant?category_filter=italian&sort=2&ll=42.3708805, -71.099856&radius_filter=1000
     };
 
