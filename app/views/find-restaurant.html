@@ -1,18 +1,36 @@
 <!-- ng switch statement that switches on the value of the form phase in the controller - when 1, show html for that page -->
-<h1>{{findRstCtrl.formPhase}}</h1>
-    <button ng-click="findRstCtrl.nextPhase()">Next</button>
-    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
+<!--     <button ng-click="findRstCtrl.nextPhase()">Next</button>
+    <button ng-click="findRstCtrl.previousPhase()">Previous</button> -->
 <div ng-switch="findRstCtrl.formPhase">
 
   <div ng-switch-when="1">
-    <button ng-click="findRstCtrl.nextPhase">Next</button>
-    <button ng-click="findRstCtrl.previousPhase">Previous</button>
+    <h1>{{findRstCtrl.formPhase}}</h1>
+<!--     <p>Detecting your location...</p> -->
+    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
+    <button ng-click="findRstCtrl.nextPhase()">Next</button>
   </div>
-<!--   <div ng-switch-when="1">
-    <button ng-click="findRstCtrl.nextPhase">Next</button>
-    <button ng-click="findRstCtrl.previousPhase">Previous</button>
-  </div>
+
   <div ng-switch-when="2">
-    <button ng-click="findRstCtrl.previousPhase">Previous</button>
-  </div> -->
+    <h1>{{findRstCtrl.formPhase}}</h1>
+<!--     <button ng-click="findRstCtrl.previousPhase">Previous</button> -->
+    <p>Location detected</p>
+    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
+    <button ng-click="findRstCtrl.nextPhase()">Next</button>
+  </div>
+
+  <div ng-switch-when="3">
+    <h1>{{findRstCtrl.formPhase}}</h1>
+
+    <!-- Category dropdown -->
+    <form>
+      <label for="category-dropdown">Category: </label><br/>
+      <select id="category-dropdown" ng-model="findRstCtrl.category" ng-options="category.id as category.name for category in findRstCtrl.categories">
+      </select>
+
+      <label for="distance-dropdown">Distance: </label><br/>
+      <select id="distance-dropdown" ng-model="findRstCtrl.distance" ng-options="distance.id as distance.name for distance in findRstCtrl.distances">
+      </select>
+    </form>
+
+  </div>
 </div>
