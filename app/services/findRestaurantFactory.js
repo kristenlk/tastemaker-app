@@ -5,8 +5,8 @@
     factory.topRestaurantMatch = {};
     factory.restaurantMatches = [];
 
-    factory.getRestaurants = function(){
-      return $http.get(appSettings.apiURL + '/restaurant').success(function(response){
+    factory.getRestaurants = function(url){
+      return $http.get(appSettings.apiURL + url).success(function(response){
         angular.copy(response, factory.restaurantMatches);
       });
     };

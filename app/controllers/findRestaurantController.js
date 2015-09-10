@@ -1,14 +1,16 @@
 (function findRestaurantControllerIIFE(){
 
-  var FindRestaurantController = function($scope, findRestaurantFactory, uiGmapGoogleMapApi, appSettings){
+  var FindRestaurantController = function(findRestaurantFactory, appSettings, $timeout, uiGmapGoogleMapApi){
     var vm = this;
     vm.appSettings = appSettings;
     vm.formPhase = 1;
     // vm.category_filter;
     // vm.radius_filter;
     vm.url;
+    vm.map = {};
+    var areaZoom = 16;
 
-    vm.restaurants = [];
+    vm.restaurants = {};
 
     // function init(){
     //   findRestaurantFactory.getRestaurants();
@@ -47,72 +49,77 @@
     ];
 
     // Get geolocation
-    navigator.geolocation.getCurrentPosition(function(position) {
-      vm.pos = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      }
+    function init(){
+      navigator.geolocation.getCurrentPosition(function(position) {
+        vm.pos = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }
 
-      // Why isn't this working...?
-      // vm.nextPhase();
-      // console.log(vm.formPhase);
+        // Why isn't this working...?
+        $timeout(function() {
+          vm.formPhase++;
+        }, 500);
+        // console.log(vm.formPhase);
 
-      /////
+        /////
 
-        // var url = appSettings.apiUrl;
-        // url += '?';
-        // url += 'latitude=' + pos.latitude
-      console.log('Your current position is ' + vm.pos.latitude + ', ' + vm.pos.longitude)
-      // if (vm.pos.latitude && vm.pos.longitude) {
-      //   vm.nextPhase();
-      //   debugger;
-      // }
-      // return vm.formPhase;
+          // var url = appSettings.apiUrl;
+          // url += '?';
+          // url += 'latitude=' + pos.latitude
+        console.log('Your current position is ' + vm.pos.latitude + ', ' + vm.pos.longitude)
+        // if (vm.pos.latitude && vm.pos.longitude) {
+        //   vm.nextPhase();
+        //   debugger;
+        // }
+        // return vm.formPhase;
 
-    // Yelp
+      // Yelp
 
-    });
-
-
-    vm.calculateURL = function(){
-      vm.url = appSettings.apiURL + '/restaurant?term=food&category_filter=';
-      vm.url += vm.category;
-      vm.url += '&sort=2&ll=';
-      vm.url += vm.pos.latitude + ', ' + vm.pos.longitude;
-      vm.url += '&radius_filter=';
-      vm.url += vm.distance;
-      console.log(vm.category);
-      console.log(vm.distance);
-      console.log(vm.url);
-      findRestaurantFactory.getRestaurants()
-        .then(function(restaurants){
-          vm.restaurants = restaurants;
-        }, function(data, status, headers, config){
-          console.log('Error getting restaurants.');
-        });
-      // http://localhost:3000/restaurant?category_filter=italian&sort=2&ll=42.3708805, -71.099856&radius_filter=1000
-
-      // vm.setMap = function(){
       uiGmapGoogleMapApi.then(function(maps) {
-        $scope.map = {
+        vm.map = {
           center: {
             latitude: vm.pos.latitude,
             longitude: vm.pos.longitude
           },
           zoom: areaZoom
         };
-          $scope.options = {
+          vm.options = {
             scrollwheel: false
           };
         });
-      // }
 
+      });
+    }
+
+    init();
+
+    vm.currentRestaurant // start at 0
+    // increment with button press
+    // vm.getRestaurants(vm.currentRestaurant)
+
+    vm.getRestaurant = function(){
+      var url = '';
+      url = '/restaurant?term=food&category_filter=';
+      url += vm.category;
+      url += '&sort=2&ll=';
+      url += vm.pos.latitude + ',' + vm.pos.longitude;
+      url += '&radius_filter=';
+      url += vm.distance;
+
+      findRestaurantFactory.getRestaurants(url)
+        .then(function(response){
+          vm.restaurants = response.data.businesses;
+        }, function(data, status, headers, config){
+          console.log('Error getting restaurants.');
+        });
+      // http://localhost:3000/restaurant?category_filter=italian&sort=2&ll=42.3708805, -71.099856&radius_filter=1000
     };
 
 }
 
     // uiGmapGoogleMapApi.
-  FindRestaurantController.$inject = ['findRestaurantFactory', 'appSettings'];
+  FindRestaurantController.$inject = ['findRestaurantFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi'];
 
   angular.module('tastemakerApp').controller('findRestaurantController', FindRestaurantController);
 

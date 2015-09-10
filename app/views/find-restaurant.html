@@ -40,15 +40,15 @@
     </form>
 
     <button ng-click="findRstCtrl.previousPhase()">Previous</button>
-    <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.calculateURL()">Next</button>
+    <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">Next</button>
   </div>
 
     <div ng-switch-when="4">
       <h1>{{findRstCtrl.formPhase}}</h1>
       <ul ng-repeat="restaurant in findRstCtrl.restaurants">
-<!--         <li>Name: {{ restaurant.name }}</li>
-        <li>Rating: {{ restaurant.rating }}</li> -->
-        <li>Restaurant: {{ restaurant }}</li><br><br>
+        <li>Name: {{ restaurant.name }}</li>
+        <li>Rating: {{ restaurant.rating }}</li>
+<!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
       </ul>
     </div>
 
