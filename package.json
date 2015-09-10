@@ -11,6 +11,7 @@
   "author": "Kristen Kehlenbeck",
   "license": "MIT",
   "dependencies": {
+    "angular-cookies": "^1.4.5",
     "bootstrap": "^3.3.5",
     "jquery": "^2.1.4",
     "simplestorage.js": "^0.1.3"

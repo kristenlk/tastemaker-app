@@ -6,8 +6,16 @@
     this.loginForm = {};
     this.loginForm.email = '';
     this.loginForm.password = '';
+    this.currentUser = authFactory.currentUser;
 
-    this.login = authFactory.login;
+    this.login = function(){
+      authFactory.login(this.loginForm).then(function(){
+        authFactory.getCurrentUser().then(function(){
+          debugger;
+        })
+      });
+    }
+
 
   };
 

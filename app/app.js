@@ -1,5 +1,5 @@
 (function tastemakerAppIIFE(){
-  var app = angular.module('tastemakerApp', ['uiGmapgoogle-maps', 'ngRoute']);
+  var app = angular.module('tastemakerApp', ['uiGmapgoogle-maps', 'ngRoute', 'ngCookies']);
 
   app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', '$httpProvider', function($routeProvider, uiGmapGoogleMapApiProvider, $httpProvider){
 
@@ -51,7 +51,13 @@
         redirectTo: '/'
       });
     }
-  ]);
+  ]).run(function($cookies, authFactory){
+    if ($.isEmptyObject(authFactory.currentUser) && $cookies.get('connect.sid')) {
+      authFactory.getCurrentUser();
+    }
+
+    // console.log($cookies.get('connect.sid'));
+  });
 
 })();
 
