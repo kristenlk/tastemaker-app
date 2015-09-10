@@ -1,7 +1,9 @@
 (function tastemakerAppIIFE(){
   var app = angular.module('tastemakerApp', ['uiGmapgoogle-maps', 'ngRoute']);
 
-  app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
+  app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', '$httpProvider', function($routeProvider, uiGmapGoogleMapApiProvider, $httpProvider){
+
+    $httpProvider.defaults.withCredentials = true;
 
     uiGmapGoogleMapApiProvider.configure({
       key: "AIzaSyCR4oUZq8t1ZrqocpZhb9KpTypa70sP4YM",

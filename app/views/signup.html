@@ -1,0 +1,19 @@
+<form>
+  <label for="email-address">Email address: </label><br/>
+  <input type="email" name="email-address"  ng-model="signupCtrl.email" ng-minlength="6" ng-required ng-class="myForm.getFormFieldCssClass(myFormNg.lastName)"><br/>
+  </select>
+
+  <br/>
+
+  <label for="password">Password: </label><br/>
+  <input type="password" name="password"  ng-model="signupCtrl.password" ng-minlength="6" ng-required ng-class="myForm.getFormFieldCssClass(myFormNg.lastName)"><br/>
+  </select>
+
+  <br/>
+
+  <label for="password">Password confirmation: </label><br/>
+  <input type="password" name="password_confirmation"  ng-model="signupCtrl.password_confirmation" ng-minlength="6" ng-required ng-class="myForm.getFormFieldCssClass(myFormNg.lastName)"><br/>
+  </select>
+
+  <button ng-click="signupCtrl.signup()">Sign Up</button>
+</form>
