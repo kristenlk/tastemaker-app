@@ -3,21 +3,27 @@
     <button ng-click="findRstCtrl.previousPhase()">Previous</button> -->
 <div ng-switch="findRstCtrl.formPhase">
 
+<!-- Location detection -->
   <div ng-switch-when="1">
     <h1>{{findRstCtrl.formPhase}}</h1>
 <!--     <p>Detecting your location...</p> -->
     <button ng-click="findRstCtrl.previousPhase()">Previous</button>
-    <button ng-click="findRstCtrl.nextPhase()">Next</button>
+    <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.setMap()">Next</button>
   </div>
 
+<!-- Location verification / map -->
   <div ng-switch-when="2">
     <h1>{{findRstCtrl.formPhase}}</h1>
 <!--     <button ng-click="findRstCtrl.previousPhase">Previous</button> -->
     <p>Location detected</p>
+
+    <ui-gmap-google-map center='findRstCtrl.map.center' zoom='findRstCtrl.map.zoom'></ui-gmap-google-map>
+
     <button ng-click="findRstCtrl.previousPhase()">Previous</button>
     <button ng-click="findRstCtrl.nextPhase()">Next</button>
   </div>
 
+<!-- Criteria selection -->
   <div ng-switch-when="3">
     <h1>{{findRstCtrl.formPhase}}</h1>
 
@@ -27,10 +33,24 @@
       <select id="category-dropdown" ng-model="findRstCtrl.category" ng-options="category.id as category.name for category in findRstCtrl.categories">
       </select>
 
+      <br>
       <label for="distance-dropdown">Distance: </label><br/>
       <select id="distance-dropdown" ng-model="findRstCtrl.distance" ng-options="distance.id as distance.name for distance in findRstCtrl.distances">
       </select>
     </form>
+
+    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
+    <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.calculateURL()">Next</button>
+  </div>
+
+    <div ng-switch-when="4">
+      <h1>{{findRstCtrl.formPhase}}</h1>
+      <ul ng-repeat="restaurant in findRstCtrl.restaurants">
+<!--         <li>Name: {{ restaurant.name }}</li>
+        <li>Rating: {{ restaurant.rating }}</li> -->
+        <li>Restaurant: {{ restaurant }}</li><br><br>
+      </ul>
+    </div>
 
   </div>
 </div>

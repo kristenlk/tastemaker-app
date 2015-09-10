@@ -18,3 +18,7 @@ h1 {
     font-family: 'Enriqueta', serif;
     color: #FFF;
 }
+
+.angular-google-map-container {
+  height: 400px;
+}
