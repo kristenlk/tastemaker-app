@@ -32,9 +32,36 @@
     vm.categories = [
       { id: 'newamerican', name: 'American (New)' },
       { id: 'tradamerican', name: 'American (Traditional)' },
+      { id: 'bbq', name: 'Barbeque' },
+      { id: 'breakfast_brunch', name: 'Breakfast & Brunch' },
+      { id: 'burgers', name: 'Burgers' },
+      { id: 'cafes', name: 'Cafes' },
+      { id: 'caribbean', name: 'Caribbean' },
+      { id: 'chinese', name: 'Chinese' },
+      { id: 'cupcakes', name: 'Cupcakes' },
+      { id: 'desserts', name: 'Desserts' },
       { id: 'hotdogs', name: 'Fast Food' },
+      { id: 'mexican', name: 'Food Trucks' },
+      { id: 'french', name: 'French' },
+      { id: 'gastropubs', name: 'Gastropubs' },
+      { id: 'gluten_free', name: 'Gluten-Free' },
+      { id: 'greek', name: 'Greek' },
+      { id: 'icecream', name: 'Ice Cream & Frozen Yogurt' },
+      { id: 'italian', name: 'Italian' },
+      { id: 'japanese', name: 'Japanese' },
+      { id: 'juicebars', name: 'Juice Bars & Smoothies' },
+      { id: 'kosher', name: 'Kosher' },
+      { id: 'latin', name: 'Latin American' },
+      { id: 'mediterranean', name: 'Mediterranean' },
       { id: 'mexican', name: 'Mexican' },
-      { id: 'pizza', name: 'Pizza' }
+      { id: 'mideastern', name: 'Middle Eastern' },
+      { id: 'moroccan', name: 'Moroccan' },
+      { id: 'pizza', name: 'Pizza' },
+      { id: 'seafood', name: 'Seafood' },
+      { id: 'southern', name: 'Southern' },
+      { id: 'thai', name: 'Thai' },
+      { id: 'vegetarian', name: 'Vegetarian' },
+      { id: 'vietnamese', name: 'Vietnamese' },
     ];
 
     vm.distance = '1609';
@@ -125,7 +152,8 @@
 
       findRestaurantFactory.getRestaurants(url)
         .then(function(response){
-          vm.restaurants = response.data.businesses;
+          // debugger;
+          vm.restaurants = response.data;
           // then get restaurant
         }, function(data, status, headers, config){
           console.log('Error getting restaurants.');
