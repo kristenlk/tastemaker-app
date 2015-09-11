@@ -19,7 +19,22 @@ h1 {
     color: #FFF;
 }
 
+.angular-google-map {
+    text-align: center;
+}
+
 .angular-google-map-container {
-  height: 400px;
-  width: 600px;
+    height: 400px;
+    width: 600px;
+}
+
+h3 {
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    margin-top: 200px;
+    padding: 0;
+    font-size: 50px;
+    font-family: 'Enriqueta', serif;
+    color: #FFF;
 }
