@@ -1,10 +1,12 @@
 <h3>My Favorites</h3>
 
 <ul ng-repeat="fav in favCtrl.favorites">
-  <li>{{ fav.name }}</li>
-  <li>{{ fav.rating }}</li>
-  <li>{{ fav.price }}</li>
-  <li>{{ fav.display_address }}</li>
-  <li>{{ fav.display_phone }}</li>
-  <li>{{ fav.url }}</li>
+  <li><h4>{{ fav.name }}</h4></li>
+  <li>Rating: {{ fav.rating }} stars</li>
+  <li>Price range: {{ fav.price }}</li>
+  <li>Address: <span ng-repeat="address in fav.display_address">
+     {{ address }}
+  </span></li>
+  <li>Phone number: {{ fav.display_phone }}</li>
+  <li>URL: {{ fav.url }}</li>
 </ul>

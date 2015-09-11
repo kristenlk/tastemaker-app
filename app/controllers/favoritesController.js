@@ -8,7 +8,11 @@
     vm.favorites = favoritesFactory.favorites;
 
     function init(){
-      favoritesFactory.getFavorites();
+      favoritesFactory.getFavorites().then(function(favorites){
+        for (var i = 0; i < vm.favorites.length; i++) {
+          vm.favorites[i].display_address = JSON.parse(vm.favorites[i].display_address);
+        }
+      });
     }
 
     init();
