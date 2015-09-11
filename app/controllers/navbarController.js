@@ -9,12 +9,13 @@
     }
 
     vm.logout = function(){
+      debugger;
       authFactory.logout();
     };
 
   };
 
-  NavbarController.$inject = ['$location', 'authFactory', '$cookies'];
+  NavbarController.$inject = ['authFactory', '$location', '$cookies'];
   angular.module('tastemakerApp').controller('navbarController', NavbarController);
 
 })(angular);
