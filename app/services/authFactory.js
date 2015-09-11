@@ -17,7 +17,7 @@
     };
 
     factory.signup = function(formData){
-      return $http.post(appSettings.apiURL + '/signup').success(function(response){
+      return $http.post(appSettings.apiURL + '/signup', formData).success(function(response){
         angular.copy(response, factory.currentUser);
         factory.getCurrentUser();
         $location.path('/account');
@@ -29,6 +29,10 @@
         angular.copy(response.user, factory.currentUser);
       });
     };
+
+    // factory.updateUser = function(){
+    //   return $http.patch(appSettings.apiURL + '/account/edit', factory.currentUser);
+    // };
 
     factory.logout = function(){
       return $http.get(appSettings.apiURL + '/logout').success(function(response){
