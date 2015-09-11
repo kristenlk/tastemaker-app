@@ -53,7 +53,7 @@
             <a ng-if="navCtrl.isLoggedIn()" href="#/account/favorites">My Favorites</a>
           </li>
           <li>
-            <a ng-if="navCtrl.isLoggedIn()" href="#/account/logout">Log Out</a>
+            <a ng-if="navCtrl.isLoggedIn()" href="#/account/logout" ng-click="navCtrl.logout()">Log Out</a>
           </li>
         </ul>
       </div>

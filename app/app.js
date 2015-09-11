@@ -29,6 +29,12 @@
         templateUrl: 'app/views/signup.html'
       })
 
+      .when('/logout', {
+        controller: 'navbarController',
+        controllerAs: 'navCtrl',
+        templateUrl: 'app/views/index.html'
+      })
+
       .when('/find-restaurant', {
         controller: 'findRestaurantController',
         controllerAs: 'findRstCtrl',
