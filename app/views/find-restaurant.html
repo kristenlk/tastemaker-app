@@ -5,18 +5,23 @@
 
 <!-- Location detection -->
   <div ng-switch-when="1">
-    <h1>{{findRstCtrl.formPhase}}</h1>
+<!--     <h1>{{findRstCtrl.formPhase}}</h1> -->
+
+    <h3>Detecting your location...</h3>
+    <!-- Eventually put an animation here -->
 <!--     <p>Detecting your location...</p> -->
-    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
-    <button ng-click="findRstCtrl.nextPhase()">Next</button>
+<!--     <span us-spinner spinner-key="spinner-1">
+
+    </span>
+ -->
+
   </div>
 
 <!-- Location verification / map -->
   <div ng-switch-when="2">
-    <h1>{{findRstCtrl.formPhase}}</h1>
-<!--     <button ng-click="findRstCtrl.previousPhase">Previous</button> -->
-    <p>Location detected</p>
+<!--     <h1>{{findRstCtrl.formPhase}}</h1> -->
 
+    <h3>Here's where we've detected your location:</h3>
     <ui-gmap-google-map center='findRstCtrl.map.center' zoom='findRstCtrl.map.zoom'>
       <ui-gmap-markers
           models="findRstCtrl.mylocation"
@@ -25,13 +30,13 @@
       </ui-gmap-markers>
     </ui-gmap-google-map>
 
-    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
-    <button ng-click="findRstCtrl.nextPhase()">Next</button>
+    <button ng-click="findRstCtrl.previousPhase()"><span class="glyphicon glyphicon-chevron-left"></span>Not where I am</button>
+    <button ng-click="findRstCtrl.nextPhase()">This is correct<span class="glyphicon glyphicon-chevron-right"></span></button>
   </div>
 
 <!-- Criteria selection -->
   <div ng-switch-when="3">
-    <h1>{{findRstCtrl.formPhase}}</h1>
+<!--     <h1>{{findRstCtrl.formPhase}}</h1> -->
 
     <!-- Category dropdown -->
     <form>
@@ -51,95 +56,56 @@
     </form>
 
     <br>
-    <button ng-click="findRstCtrl.previousPhase()">Previous</button>
-    <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">Next</button>
+<!--     <button ng-click="findRstCtrl.previousPhase()">Previous</button> -->
+    <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">Let's find your dinner.<span class="glyphicon glyphicon-chevron-right"></span></button>
   </div>
 
     <div ng-switch-when="4">
-      <h1>{{findRstCtrl.formPhase}}</h1>
-<!--       <ul ng-repeat="restaurant in findRstCtrl.restaurants"> -->
-        <li><h3>Name: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].name }}</h3></li>
-        <li>Rating: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].rating }}</li>
-        <li>Address: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address }}
-        <li>Phone number: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone }}</li>
-        <li>Yelp URL: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].url }}</li>
-        <li>Price: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].price }}</li>
-<!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
+<!--       <h1>{{findRstCtrl.formPhase}}</h1> -->
+
+      <form>
+        <li ng-model="findRstCtrl.favForm.name">
+          <a href="{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].url }}">
+            <h3 ng-model="findRstCtrl.favForm.url">{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].name }}</h3>
+          </a>
+        </li>
+
+        <li ng-model="findRstCtrl.favForm.rating">
+          Rating: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].rating }}
+        </li>
+
+        <li ng-model="findRstCtrl.favForm.display_address">
+          Address: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address }}
+        </li>
+
+        <li ng-model="findRstCtrl.favForm.display_phone">
+          Phone number: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone }}
+        </li>
+
+        <li ng-model="findRstCtrl.favForm.price">
+          Price: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].price }}
+        </li>
+
+        <li ng-model="findRstCtrl.favForm.yelp_id">
+          Id (hide this): {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].id }}
+        </li>
+
+      </form>
       </ul>
-      <button ng-if="findRstCtrl.currentRestaurant < 4" ng-click="findRstCtrl.nextRestaurant()">I don't like this restaurant - give me the next best one.</button>
-      <p ng-if="findRstCtrl.currentRestaurant >= 4">You've reached your limit! If you don't like any of the restaurants we've provided, you might want to start over!</p>
+
+      <button ng-if="findRstCtrl.currentRestaurant < 4" ng-click="findRstCtrl.nextRestaurant()">
+        I don't like this restaurant - give me the next best one.
+      </button>
+
+      <button ng-if="findRstCtrl.currentRestaurant < 4" ng-click="findRstCtrl.saveToFavorites()">
+        Save for later
+      </button>
+
+      <p ng-if="findRstCtrl.currentRestaurant >= 4">
+        You've reached your limit! If you don't like any of the restaurants we've provided, you might want to start over!
+      </p>
+
     </div>
 
   </div>
 </div>
-
-
-<!--     <div ng-switch-when="4">
-      <h1>{{findRstCtrl.formPhase}}</h1>
-      <ul ng-model="findRstCtrl.restaurants[0]">
-        <li>Name: {{ restaurant.name }}</li>
-        <li>Rating: {{ rating }}</li>
-        <li>Address: {{ location.display_address }}
-        <li>Phone number: {{ display_phone }}</li>
-        <li>Yelp URL: {{ url }}</li>
-        <li>Price: {{ price }}</li> -->
-<!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
- <!--      </ul>
-      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
-    </div>
-
-    <div ng-switch-when="5">
-      <h1>{{findRstCtrl.formPhase}}</h1>
-      <ul ng-model="findRstCtrl.restaurants[1]">
-        <li>Name: {{ restaurant.name }}</li>
-        <li>Rating: {{ restaurant.rating }}</li>
-        <li>Address: {{ restaurant.location.display_address }}
-        <li>Phone number: {{ restaurant.display_phone }}</li>
-        <li>Yelp URL: {{ restaurant.url }}</li>
-        <li>Price: {{ restaurant.price }}</li>
- --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
-<!--       </ul>
-      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
-    </div>
-
-    <div ng-switch-when="6">
-      <h1>{{findRstCtrl.formPhase}}</h1>
-      <ul ng-model="findRstCtrl.restaurants[2]">
-        <li>Name: {{ restaurant.name }}</li>
-        <li>Rating: {{ restaurant.rating }}</li>
-        <li>Address: {{ restaurant.location.display_address }}
-        <li>Phone number: {{ restaurant.display_phone }}</li>
-        <li>Yelp URL: {{ restaurant.url }}</li>
-        <li>Price: {{ restaurant.price }}</li>
- --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
-<!--       </ul>
-      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
-    </div>
-
-    <div ng-switch-when="7">
-      <h1>{{findRstCtrl.formPhase}}</h1>
-      <ul ng-model="findRstCtrl.restaurants[3]">
-        <li>Name: {{ restaurant.name }}</li>
-        <li>Rating: {{ restaurant.rating }}</li>
-        <li>Address: {{ restaurant.location.display_address }}
-        <li>Phone number: {{ restaurant.display_phone }}</li>
-        <li>Yelp URL: {{ restaurant.url }}</li>
-        <li>Price: {{ restaurant.price }}</li>
- --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
-<!--       </ul>
-      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
-    </div>
-
-    <div ng-switch-when="8">
-      <h1>{{findRstCtrl.formPhase}}</h1>
-      <ul ng-model="findRstCtrl.restaurants[4]">
-        <li>Name: {{ restaurant.name }}</li>
-        <li>Rating: {{ restaurant.rating }}</li>
-        <li>Address: {{ restaurant.location.display_address }}
-        <li>Phone number: {{ restaurant.display_phone }}</li>
-        <li>Yelp URL: {{ restaurant.url }}</li>
-        <li>Price: {{ restaurant.price }}</li>
- --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
-<!--       </ul>
-      <p>You've reached your limit! If you don't like any of the restaurants we've provided, you might want to start over!</p>
-    </div> -->

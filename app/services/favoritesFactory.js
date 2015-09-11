@@ -10,6 +10,10 @@
       });
     };
 
+    factory.saveToFavorites = function(restaurant){
+      return $http.post(appSettings.apiURL + '/account/favorites', restaurant);
+    };
+
     return factory;
   };
 

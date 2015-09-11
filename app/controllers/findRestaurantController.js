@@ -1,22 +1,27 @@
 (function findRestaurantControllerIIFE(){
 
-  var FindRestaurantController = function(findRestaurantFactory, appSettings, $timeout, uiGmapGoogleMapApi){
+  var FindRestaurantController = function(findRestaurantFactory, favoritesFactory, appSettings, $timeout, uiGmapGoogleMapApi){
     var vm = this;
     vm.appSettings = appSettings;
     vm.formPhase = 1;
-    // vm.category_filter;
-    // vm.radius_filter;
+
     vm.url;
     vm.map = {};
     var areaZoom = 16;
 
     vm.restaurants = {};
 
-    // function init(){
-    //   findRestaurantFactory.getRestaurants();
-    // }
-
-    // init();
+    // For saving to favorites
+    vm.favForm = {};
+    vm.favForm.yelp_id = '';
+    vm.favForm.name = '';
+    vm.favForm.url = '';
+    vm.favForm.rating;
+    vm.favForm.display_address = '';
+    vm.favForm.display_phone = '';
+    vm.favForm.latitude = '';
+    vm.favForm.longitude = '';
+    vm.favForm.price = '';
 
     // Increments phase of restaurant finding process
     vm.nextPhase = function(){
@@ -99,17 +104,10 @@
         $timeout(function() {
           vm.formPhase++;
         }, 500);
-        // console.log(vm.formPhase);
 
-        /////
-
-          // var url = appSettings.apiUrl;
-          // url += '?';
-          // url += 'latitude=' + pos.latitude
         console.log('Your current position is ' + vm.pos.latitude + ', ' + vm.pos.longitude)
         // if (vm.pos.latitude && vm.pos.longitude) {
         //   vm.nextPhase();
-        //   debugger;
         // }
         // return vm.formPhase;
 
@@ -135,14 +133,6 @@
           }
         ];
       });
-
-      // var latlng = new google.maps.LatLng(vm.pos.latitude, vm.pos.longitude);
-
-      // var marker = new google.maps.Marker({
-      //   map: vm.map,
-      //   position: latlng
-      // });
-
 
     });
   }
@@ -178,35 +168,29 @@
         }, function(data, status, headers, config){
           console.log('Error getting restaurants.');
         });
+    };
 
+    vm.currentRestaurant = 0;
 
+  // Increments phase of restaurant finding process
+    vm.nextRestaurant = function(){
+      vm.currentRestaurant++;
+    }
 
-      vm.currentRestaurant = 0;
+  // Decrements phase of restaurant finding process
+    vm.previousRestaurant = function(){
+      vm.currentRestaurant--;
+    }
 
-      // Increments phase of restaurant finding process
-      vm.nextRestaurant = function(){
-        vm.currentRestaurant++;
-        // debugger;
-      }
-
-    // Decrements phase of restaurant finding process
-      vm.previousRestaurant = function(){
-        vm.currentRestaurant--;
-      }
-      // start at 0
-      // increment with button press
-      // vm.getRestaurants(vm.currentRestaurant)
-
-        // http://localhost:3000/restaurant?category_filter=italian&sort=2&ll=42.3708805, -71.099856&radius_filter=1000
-      };
+    vm.saveToFavorites = function(){
+      favoritesFactory.saveToFavorites(vm.favForm);
+    }
 
 }
 
     // uiGmapGoogleMapApi.
-  FindRestaurantController.$inject = ['findRestaurantFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi'];
+  FindRestaurantController.$inject = ['findRestaurantFactory', 'favoritesFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi'];
 
   angular.module('tastemakerApp').controller('findRestaurantController', FindRestaurantController);
 
 })();
-
-

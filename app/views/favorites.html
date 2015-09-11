@@ -1,1 +1,10 @@
-<h1>{{ favCtrl.favorites }}</h1>
+<h3>My Favorites</h3>
+
+<ul ng-repeat="fav in favCtrl.favorites">
+  <li>{{ fav.name }}</li>
+  <li>{{ fav.rating }}</li>
+  <li>{{ fav.price }}</li>
+  <li>{{ fav.display_address }}</li>
+  <li>{{ fav.display_phone }}</li>
+  <li>{{ fav.url }}</li>
+</ul>
