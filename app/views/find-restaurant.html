@@ -43,20 +43,103 @@
       <label for="distance-dropdown">Distance: </label><br/>
       <select id="distance-dropdown" ng-model="findRstCtrl.distance" ng-options="distance.id as distance.name for distance in findRstCtrl.distances">
       </select>
+
+      <br>
+      <label for="price-dropdown">Price Range: </label><br/>
+      <select id="price-dropdown" ng-model="findRstCtrl.price" ng-options="price.id as price.name for price in findRstCtrl.prices">
+      </select>
     </form>
 
+    <br>
     <button ng-click="findRstCtrl.previousPhase()">Previous</button>
     <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">Next</button>
   </div>
 
     <div ng-switch-when="4">
       <h1>{{findRstCtrl.formPhase}}</h1>
-      <ul ng-repeat="restaurant in findRstCtrl.restaurants">
-        <li>Name: {{ restaurant.name }}</li>
-        <li>Rating: {{ restaurant.rating }}</li>
+<!--       <ul ng-repeat="restaurant in findRstCtrl.restaurants"> -->
+        <li><h3>Name: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].name }}</h3></li>
+        <li>Rating: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].rating }}</li>
+        <li>Address: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address }}
+        <li>Phone number: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone }}</li>
+        <li>Yelp URL: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].url }}</li>
+        <li>Price: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].price }}</li>
 <!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
       </ul>
+      <button ng-if="findRstCtrl.currentRestaurant < 4" ng-click="findRstCtrl.nextRestaurant()">I don't like this restaurant - give me the next best one.</button>
+      <p ng-if="findRstCtrl.currentRestaurant >= 4">You've reached your limit! If you don't like any of the restaurants we've provided, you might want to start over!</p>
     </div>
 
   </div>
 </div>
+
+
+<!--     <div ng-switch-when="4">
+      <h1>{{findRstCtrl.formPhase}}</h1>
+      <ul ng-model="findRstCtrl.restaurants[0]">
+        <li>Name: {{ restaurant.name }}</li>
+        <li>Rating: {{ rating }}</li>
+        <li>Address: {{ location.display_address }}
+        <li>Phone number: {{ display_phone }}</li>
+        <li>Yelp URL: {{ url }}</li>
+        <li>Price: {{ price }}</li> -->
+<!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
+ <!--      </ul>
+      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
+    </div>
+
+    <div ng-switch-when="5">
+      <h1>{{findRstCtrl.formPhase}}</h1>
+      <ul ng-model="findRstCtrl.restaurants[1]">
+        <li>Name: {{ restaurant.name }}</li>
+        <li>Rating: {{ restaurant.rating }}</li>
+        <li>Address: {{ restaurant.location.display_address }}
+        <li>Phone number: {{ restaurant.display_phone }}</li>
+        <li>Yelp URL: {{ restaurant.url }}</li>
+        <li>Price: {{ restaurant.price }}</li>
+ --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
+<!--       </ul>
+      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
+    </div>
+
+    <div ng-switch-when="6">
+      <h1>{{findRstCtrl.formPhase}}</h1>
+      <ul ng-model="findRstCtrl.restaurants[2]">
+        <li>Name: {{ restaurant.name }}</li>
+        <li>Rating: {{ restaurant.rating }}</li>
+        <li>Address: {{ restaurant.location.display_address }}
+        <li>Phone number: {{ restaurant.display_phone }}</li>
+        <li>Yelp URL: {{ restaurant.url }}</li>
+        <li>Price: {{ restaurant.price }}</li>
+ --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
+<!--       </ul>
+      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
+    </div>
+
+    <div ng-switch-when="7">
+      <h1>{{findRstCtrl.formPhase}}</h1>
+      <ul ng-model="findRstCtrl.restaurants[3]">
+        <li>Name: {{ restaurant.name }}</li>
+        <li>Rating: {{ restaurant.rating }}</li>
+        <li>Address: {{ restaurant.location.display_address }}
+        <li>Phone number: {{ restaurant.display_phone }}</li>
+        <li>Yelp URL: {{ restaurant.url }}</li>
+        <li>Price: {{ restaurant.price }}</li>
+ --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
+<!--       </ul>
+      <button ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">I don't like this restaurant - give me the next best one.</button>
+    </div>
+
+    <div ng-switch-when="8">
+      <h1>{{findRstCtrl.formPhase}}</h1>
+      <ul ng-model="findRstCtrl.restaurants[4]">
+        <li>Name: {{ restaurant.name }}</li>
+        <li>Rating: {{ restaurant.rating }}</li>
+        <li>Address: {{ restaurant.location.display_address }}
+        <li>Phone number: {{ restaurant.display_phone }}</li>
+        <li>Yelp URL: {{ restaurant.url }}</li>
+        <li>Price: {{ restaurant.price }}</li>
+ --><!--         <li>Restaurant: {{ restaurant }}</li><br><br> -->
+<!--       </ul>
+      <p>You've reached your limit! If you don't like any of the restaurants we've provided, you might want to start over!</p>
+    </div> -->

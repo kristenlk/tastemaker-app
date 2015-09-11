@@ -18,10 +18,12 @@
 
     // init();
 
+    // Increments phase of restaurant finding process
     vm.nextPhase = function(){
       vm.formPhase++;
     }
 
+  // Decrements phase of restaurant finding process
     vm.previousPhase = function(){
       vm.formPhase--;
     }
@@ -73,6 +75,16 @@
       { id: '1609', name: '1 mile' },
       { id: '3218', name: '2 miles' },
       { id: '8046', name: '5 miles' }
+    ];
+
+    vm.price = '2';
+
+    // ids are distances in meters (as defined by Yelp API)
+    vm.prices = [
+      { id: '1', name: '$' },
+      { id: '2', name: '$$ (and below)' },
+      { id: '3', name: '$$$ (and below)' },
+      { id: '4', name: '$$$$ (and below)' }
     ];
 
     // Get geolocation
@@ -137,10 +149,6 @@
 
     init();
 
-    vm.currentRestaurant; // start at 0
-    // increment with button press
-    // vm.getRestaurants(vm.currentRestaurant)
-
     vm.getRestaurant = function(){
       var url = '';
       url = '/restaurant?term=food&category_filter=';
@@ -149,18 +157,48 @@
       url += vm.pos.latitude + ',' + vm.pos.longitude;
       url += '&radius_filter=';
       url += vm.distance;
+      url += '&price=' + vm.price
 
       findRestaurantFactory.getRestaurants(url)
-        .then(function(response){
+        .then(function(restaurants){
           // debugger;
-          vm.restaurants = response.data;
+          vm.restaurants = restaurants.data.sort(function(a, b){
+            var ratingA = a.rating;
+            var ratingB = b.rating;
+            if (ratingA < ratingB) {
+              return 1;
+            }
+            if (ratingA > ratingB) {
+              return -1;
+            }
+            return 0;
+          });
+
           // then get restaurant
         }, function(data, status, headers, config){
           console.log('Error getting restaurants.');
         });
 
-      // http://localhost:3000/restaurant?category_filter=italian&sort=2&ll=42.3708805, -71.099856&radius_filter=1000
-    };
+
+
+      vm.currentRestaurant = 0;
+
+      // Increments phase of restaurant finding process
+      vm.nextRestaurant = function(){
+        vm.currentRestaurant++;
+        // debugger;
+      }
+
+    // Decrements phase of restaurant finding process
+      vm.previousRestaurant = function(){
+        vm.currentRestaurant--;
+      }
+      // start at 0
+      // increment with button press
+      // vm.getRestaurants(vm.currentRestaurant)
+
+        // http://localhost:3000/restaurant?category_filter=italian&sort=2&ll=42.3708805, -71.099856&radius_filter=1000
+      };
 
 }
 
@@ -170,3 +208,5 @@
   angular.module('tastemakerApp').controller('findRestaurantController', FindRestaurantController);
 
 })();
+
+
