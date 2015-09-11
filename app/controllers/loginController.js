@@ -15,7 +15,6 @@
         // })
       });
     }
-
   };
 
   LoginController.$inject = ['authFactory', 'appSettings'];

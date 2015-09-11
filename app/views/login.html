@@ -1,12 +1,12 @@
 <form>
   <label for="email-address">Email address: </label><br/>
-  <input type="email" name="email-address"  ng-model="loginCtrl.loginForm.email" ng-minlength="6" ng-required ng-class="myForm.getFormFieldCssClass(myFormNg.lastName)"><br/>
+  <input type="email" name="email-address"  ng-model="loginCtrl.loginForm.email" ng-required><br/>
   </select>
 
   <br/>
 
   <label for="password">Password: </label><br/>
-  <input type="password" name="password"  ng-model="loginCtrl.loginForm.password" ng-minlength="6" ng-required ng-class="myForm.getFormFieldCssClass(myFormNg.lastName)"><br/>
+  <input type="password" name="password"  ng-model="loginCtrl.loginForm.password" ng-minlength="6" ng-required><br/>
   </select>
 
   <br/>
@@ -14,6 +14,6 @@
   <button ng-click="loginCtrl.login()">Log In</button>
   <!-- Should also change navbar... -->
 
-  <h1>{{ loginCtrl.currentUser }}</h1>
+<!--   <h1>{{ loginCtrl.currentUser }}</h1> -->
 
 </form>
