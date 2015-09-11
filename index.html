@@ -41,16 +41,19 @@
         <ul class="nav navbar-nav">
 <!--         <div ng-if="!NavbarCtrl.isLoggedIn()" class="navbar-custom-menu"> -->
           <li>
-            <a href="#/login">Log In</a>
+            <a ng-if="!navCtrl.isLoggedIn()" href="#/login">Log In</a>
           </li>
           <li>
-            <a href="#/signup">Sign Up</a>
+            <a ng-if="!navCtrl.isLoggedIn()" href="#/signup">Sign Up</a>
           </li>
           <li>
-            <a href="#/account">My Account</a>
+            <a ng-if="navCtrl.isLoggedIn()" href="#/account">My Account</a>
           </li>
           <li>
-            <a href="#/account/favorites">My Favorites</a>
+            <a ng-if="navCtrl.isLoggedIn()" href="#/account/favorites">My Favorites</a>
+          </li>
+          <li>
+            <a ng-if="navCtrl.isLoggedIn()" href="#/account/logout">Log Out</a>
           </li>
         </ul>
       </div>
@@ -87,6 +90,7 @@
   <script src='app/controllers/loginController.js'></script>
   <script src='app/controllers/accountController.js'></script>
   <script src='app/controllers/favoritesController.js'></script>
+  <script src='app/controllers/navbarController.js'></script>
 
   <!-- Angular Google Maps stuff -->
   <script src='bower_components/lodash/lodash.min.js'></script>

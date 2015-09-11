@@ -8,9 +8,9 @@
       return ($cookies.get('connect.sid'));
     }
 
-    // vm.logOut = function(){
-
-    // };
+    vm.logout = function(){
+      authFactory.logout();
+    };
 
   };
 

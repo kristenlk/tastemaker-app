@@ -19,26 +19,23 @@
     factory.signup = function(formData){
       return $http.post(appSettings.apiURL + '/signup').success(function(response){
         angular.copy(response, factory.currentUser);
-        // angular.copy(response, factory.restaurantMatches);
+        factory.getCurrentUser();
+        $location.path('/account');
       });
     };
 
     factory.getCurrentUser = function(){
       return $http.get(appSettings.apiURL + '/account/').success(function(response){
         angular.copy(response.user, factory.currentUser);
-        // angular.copy(response, factory.restaurantMatches);
-        // debugger;
       });
     };
 
-    // factory.getFavorites = function(){
-    //   return $http.get(appSettings.apiURL + '/account/favorites').success(function(response){
-    //     angular.copy(response, factory.favorites);
-    //     // angular.copy(response, factory.restaurantMatches);
-    //     // debugger;
-    //   });
-    // };
-
+    factory.logout = function(){
+      return $http.get(appSettings.apiURL + '/logout').success(function(response){
+        factory.currentUser = {};
+        $location.path('/');
+      });
+    };
 
     return factory;
   };
