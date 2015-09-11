@@ -6,6 +6,13 @@ body {
     background-size: cover;
     -o-background-size: cover;
     text-align: center;
+/*    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+*/
+    font-size: 16px;
+}
+
+li {
+    list-style-type: none;
 }
 
 h1 {
@@ -32,9 +39,34 @@ h3 {
     text-align: center;
     vertical-align: middle;
     margin: 0;
-    margin-top: 200px;
+    margin-top: 100px;
     padding: 0;
     font-size: 50px;
     font-family: 'Enriqueta', serif;
     color: #FFF;
+}
+
+h4 {
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    margin-top: 100px;
+    padding: 0;
+    font-size: 30px;
+    font-family: 'Enriqueta', serif;
+    color: #FFF;
+}
+
+
+.navbar-brand {
+    font-size: 20px;
+}
+
+/*#main-body {
+    background-color: #FFF;
+}
+*/
+
+form {
+    margin-top: 100px;
 }
