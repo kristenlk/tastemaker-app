@@ -67,9 +67,10 @@
               <button class="btn btn-default" ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">Let's find your dinner.&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></button>
             </div>
 
-              <div ng-switch-when="4">
-          <!--       <h1>{{findRstCtrl.formPhase}}</h1> -->
-<!--                 <div ng-show="findRstCtrl.restaurants > 0"> -->
+            <div ng-switch-when="4">
+
+              <div ng-if="findRstCtrl.restaurants.length > 0 && findRstCtrl.restaurants[findRstCtrl.currentRestaurant]">
+                <ul>
                   <li>
                     <a href="{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].url }}">
                       <h3>{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].name }}</h3>
@@ -92,15 +93,16 @@
                     Price: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].price }}
                   </li>
                 </ul>
+                <br>
 
-                <ui-gmap-google-map control="findRstCtrl.directionsMap.control" center="findRstCtrl.directionsMap.center" zoom="findRstCtrl.directionsMap.zoom">
-   <!--                <ui-gmap-markers
-                      models="findRstCtrl.restaurantLocation"
-                      coords="'self'"
-                      >
-                  </ui-gmap-markers> -->
-                </ui-gmap-google-map>
+                <!-- Google Maps directions -->
+                <!-- Using ng-show below causes gmap to be cut off, so using ng-if instead -->
+                <div class="col-lg-offset-1">
+                  <ui-gmap-google-map control="findRstCtrl.directionsMap.control" center="findRstCtrl.directionsMap.center" zoom="findRstCtrl.directionsMap.zoom">
+                  </ui-gmap-google-map>
+                </div>
 
+                <br>
 
                 <button class="btn btn-default" ng-if="findRstCtrl.currentRestaurant < 4" ng-click="findRstCtrl.nextRestaurant()">
                   I don't like this restaurant - give me the next best one.&nbsp;
@@ -112,13 +114,34 @@
                   <span class="glyphicon glyphicon-heart"></span>
                 </button>
 
-                <p ng-if="findRstCtrl.currentRestaurant >= 4">
+                <h4 ng-if="findRstCtrl.currentRestaurant >= 4">
                   You've reached your limit! If you don't like any of the restaurants we've provided, you might want to start over!
-                </p>
+                </h4>
 
               </div>
 
+            <div ng-if="findRstCtrl.restaurants.length > 0 && !findRstCtrl.restaurants[findRstCtrl.currentRestaurant]">
+              <h4>There are no more restaurants that match your criteria. Please try searching again!</h4>
+
+              <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                Start over
+              </button>
+
             </div>
+
+            <div ng-if="findRstCtrl.restaurants.data.length === 0">
+              <h4>Your search didn't return any restaurants. Please try searching again!</h4>
+
+              <br>
+
+              <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                Start over
+              </button>
+
+            </div>
+
           </div>
         </div>
       </div>

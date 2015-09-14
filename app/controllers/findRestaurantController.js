@@ -20,6 +20,10 @@
   // Decrements phase of restaurant finding process
     vm.previousPhase = function(){
       vm.formPhase--;
+      // Setting vm.restaurants to an empty object to account for when a user presses the back button. Prior to doing so, when a user selected new criteria and pressed enter, they saw the old message / restaurant until the new results loaded.
+      vm.restaurants = {}
+      vm.currentRestaurant = 0;
+      // debugger;
     }
 
     vm.category = 'mexican';
@@ -37,7 +41,7 @@
       { id: 'cupcakes', name: 'Cupcakes' },
       { id: 'desserts', name: 'Desserts' },
       { id: 'hotdogs', name: 'Fast Food' },
-      { id: 'mexican', name: 'Food Trucks' },
+      { id: 'foodtrucks', name: 'Food Trucks' },
       { id: 'french', name: 'French' },
       { id: 'gastropubs', name: 'Gastropubs' },
       { id: 'gluten_free', name: 'Gluten-Free' },
@@ -71,14 +75,14 @@
       { id: '8046', name: '5 miles' }
     ];
 
-    vm.price = '2';
+    vm.price = '$$';
 
     // ids are distances in meters (as defined by Yelp API)
     vm.prices = [
-      { id: '1', name: '$' },
-      { id: '2', name: '$$ (and below)' },
-      { id: '3', name: '$$$ (and below)' },
-      { id: '4', name: '$$$$ (and below)' }
+      { id: '$', name: '$' },
+      { id: '$$', name: '$$ (and below)' },
+      { id: '$$$', name: '$$$ (and below)' },
+      { id: '$$$$', name: '$$$$ (and below)' }
     ];
 
     // Get geolocation
@@ -130,7 +134,7 @@
 
     vm.getRestaurant = function(){
       var url = '';
-      url = '/restaurant?term=food&category_filter=';
+      url = '/restaurant?category_filter=';
       url += vm.category;
       url += '&sort=2&ll=';
       url += vm.pos.latitude + ',' + vm.pos.longitude;
@@ -140,61 +144,65 @@
 
       findRestaurantFactory.getRestaurants(url)
         .then(function(restaurants){
-          // debugger;
-          vm.restaurants = restaurants.data.sort(function(a, b){
-            var ratingA = a.rating;
-            var ratingB = b.rating;
-            if (ratingA < ratingB) {
-              return 1;
-            }
-            if (ratingA > ratingB) {
-              return -1;
-            }
-            return 0;
-          });
-
-          uiGmapGoogleMapApi.then(function(maps) {
-            // stores maps in vm.maps so I can access it in redrawRoute() later on
-            vm.maps = maps;
-            vm.directionsMap = {
-              control: {},
-              center: {
-                latitude: vm.pos.latitude,
-                longitude: vm.pos.longitude
-              },
-              zoom: areaZoom
-            };
-            vm.options = {
-              scrollwheel: false
-            };
-
-            vm.directionsService = new maps.DirectionsService();
-            vm.directionsDisplay = new maps.DirectionsRenderer();
-
-            vm.route = {
-              origin: new maps.LatLng(
-                vm.pos.latitude,
-                vm.pos.longitude
-              ),
-              destination: new maps.LatLng(
-                vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
-                vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
-              ),
-              travelMode: maps.TravelMode['DRIVING']
-            };
-
-            vm.directionsService.route(vm.route, function(response, status){
-              if (status === google.maps.DirectionsStatus.OK) {
-                // debugger;
-                vm.directionsDisplay.setDirections(response);
-                vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
-              } else {
-                console.log('Directions unsuccessful');
+          vm.restaurants = restaurants;
+          if (restaurants.data.length === 0) {
+            console.log('Your search didn\'t return any restaurants. Please try searching again!');
+          } else {
+            vm.restaurants = restaurants.data.sort(function(a, b){
+              var ratingA = a.rating;
+              var ratingB = b.rating;
+              if (ratingA < ratingB) {
+                return 1;
               }
-            })
+              if (ratingA > ratingB) {
+                return -1;
+              }
+              return 0;
+            });
+            console.log(vm.restaurants);
+            // debugger;
+            uiGmapGoogleMapApi.then(function(maps) {
+              // stores maps in vm.maps so I can access it in redrawRoute() later on
+              vm.maps = maps;
+              vm.directionsMap = {
+                control: {},
+                center: {
+                  latitude: vm.pos.latitude,
+                  longitude: vm.pos.longitude
+                },
+                zoom: areaZoom
+              };
+              vm.options = {
+                scrollwheel: false
+              };
 
-          });
+              vm.directionsService = new maps.DirectionsService();
+              vm.directionsDisplay = new maps.DirectionsRenderer();
 
+              vm.route = {
+                origin: new maps.LatLng(
+                  vm.pos.latitude,
+                  vm.pos.longitude
+                ),
+                destination: new maps.LatLng(
+                  vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
+                  vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
+                ),
+                travelMode: maps.TravelMode['DRIVING']
+              };
+
+              vm.directionsService.route(vm.route, function(response, status){
+                if (status === google.maps.DirectionsStatus.OK) {
+                  // debugger;
+                  vm.directionsDisplay.setDirections(response);
+                  vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
+                } else {
+                  console.log('Directions unsuccessful');
+                }
+              })
+
+            });
+          }
           // then get restaurant
         }, function(data, status, headers, config){
           console.log('Error getting restaurants.');
@@ -206,7 +214,12 @@
   // Increments phase of restaurant finding process
     vm.nextRestaurant = function(){
       vm.currentRestaurant++;
-      redrawRoute();
+      // If there is a restaurant past the one you're on, redraw the maps route.
+      if (vm.restaurants[vm.currentRestaurant]) {
+        redrawRoute();
+      } else {
+        console.log('There are no more restaurants that match your criteria. Please try searching again!')
+      }
     }
 
   // Decrements phase of restaurant finding process
@@ -220,28 +233,30 @@
     }
 
     function redrawRoute(){
-        vm.route = {
-          origin: new vm.maps.LatLng(
-            vm.pos.latitude,
-            vm.pos.longitude
-          ),
-          destination: new vm.maps.LatLng(
-            vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
-            vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
-          ),
-          travelMode: vm.maps.TravelMode['DRIVING']
-        };
-
-        vm.directionsService.route(vm.route, function(response, status){
-          if (status === google.maps.DirectionsStatus.OK) {
-            // debugger;
-            vm.directionsDisplay.setDirections(response);
-            vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
-          } else {
-            console.log('Directions unsuccessful');
-          }
-        })
+      console.log(vm.currentRestaurant);
+      // debugger;
+      vm.route = {
+        origin: new vm.maps.LatLng(
+          vm.pos.latitude,
+          vm.pos.longitude
+        ),
+        destination: new vm.maps.LatLng(
+          vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
+          vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
+        ),
+        travelMode: vm.maps.TravelMode['DRIVING']
       };
+
+      vm.directionsService.route(vm.route, function(response, status){
+        if (status === google.maps.DirectionsStatus.OK) {
+          // debugger;
+          vm.directionsDisplay.setDirections(response);
+          vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
+        } else {
+          console.log('Directions unsuccessful');
+        }
+      })
+    };
 }
 
     // uiGmapGoogleMapApi.

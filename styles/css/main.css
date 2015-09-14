@@ -11,6 +11,10 @@ body {
     font-size: 16px;
 }
 
+a {
+    color: #FFF;
+}
+
 li {
     list-style-type: none;
 }
