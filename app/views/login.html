@@ -1,15 +1,11 @@
 <form>
-  <label for="email-address">Email address: </label><br/>
-  <input type="email" name="email-address"  ng-model="loginCtrl.loginForm.email" ng-required><br/>
+  <label for="email-address">Email address: </label>
+  <input type="email" name="email-address"  ng-model="loginCtrl.loginForm.email" ng-required>
   </select>
 
-  <br/>
-
-  <label for="password">Password: </label><br/>
-  <input type="password" name="password"  ng-model="loginCtrl.loginForm.password" ng-minlength="6" ng-required><br/>
+  <label for="password">Password: </label>
+  <input type="password" name="password"  ng-model="loginCtrl.loginForm.password" ng-minlength="6" ng-required>
   </select>
-
-  <br/>
 
   <button class="btn btn-default" ng-click="loginCtrl.login()">Log In</button>
 

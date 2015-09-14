@@ -1,156 +1,135 @@
-<!-- ng switch statement that switches on the value of the form phase in the controller - when 1, show html for that page -->
-<!--     <button ng-click="findRstCtrl.nextPhase()">Next</button>
-    <button ng-click="findRstCtrl.previousPhase()">Previous</button> -->
-<section id="about" class="container content-section text-center">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
+<div ng-switch="findRstCtrl.formPhase">
 
-          <div id="find-rst-body" class="container text-center">
-            <div class="row">
-              <div class="col-lg-8">
-          <div ng-switch="findRstCtrl.formPhase">
+  <!-- Location detection -->
+  <div ng-switch-when="1">
+    <h3>Detecting your location...</h3>
+    <!-- Eventually put an animation here -->
+  </div>
 
-          <!-- Location detection -->
-            <div ng-switch-when="1">
-          <!--     <h1>{{findRstCtrl.formPhase}}</h1> -->
+  <!-- Location verification / map -->
+  <div ng-switch-when="2">
+    <h3>Here's where we've detected your location:</h3>
 
-              <h3>Detecting your location...</h3>
-              <br>
-              <!-- Eventually put an animation here -->
-          <!--     <p>Detecting your location...</p> -->
+    <div class="col-md-offset-2 map">
+      <ui-gmap-google-map center='findRstCtrl.userLocationMap.center' zoom='findRstCtrl.userLocationMap.zoom'>
+        <ui-gmap-markers
+            models="findRstCtrl.userLocation"
+            coords="'self'"
+            >
+        </ui-gmap-markers>
+      </ui-gmap-google-map>
+    </div>
 
-            </div>
+    <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Not where I am</button>
+    <button class="btn btn-default" ng-click="findRstCtrl.nextPhase()">This is correct&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></button>
+  </div>
 
-          <!-- Location verification / map -->
-            <div ng-switch-when="2">
-          <!--     <h1>{{findRstCtrl.formPhase}}</h1> -->
+  <!-- Criteria selection -->
+  <div ng-switch-when="3">
 
-              <h3>Here's where we've detected your location:</h3>
-              <br>
-              <div class="col-lg-offset-1">
-                <ui-gmap-google-map center='findRstCtrl.userLocationMap.center' zoom='findRstCtrl.userLocationMap.zoom'>
-                  <ui-gmap-markers
-                      models="findRstCtrl.userLocation"
-                      coords="'self'"
-                      >
-                  </ui-gmap-markers>
-                </ui-gmap-google-map>
-              </div>
-              <br>
-              <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Not where I am</button>
-              <button class="btn btn-default" ng-click="findRstCtrl.nextPhase()">This is correct&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></button>
-            </div>
+    <!-- Category dropdown -->
+    <form class="criteria-selection">
+      <span class="labels">Category: </span><br>
+      <select id="category-dropdown" ng-model="findRstCtrl.category" ng-options="category.id as category.name for category in findRstCtrl.categories">
+      </select>
+      <br>
 
-          <!-- Criteria selection -->
-            <div ng-switch-when="3">
-          <!--     <h1>{{findRstCtrl.formPhase}}</h1> -->
+      <span class="labels">Distance: </span><br>
+      <select id="distance-dropdown" ng-model="findRstCtrl.distance" ng-options="distance.id as distance.name for distance in findRstCtrl.distances">
+      </select>
+      <br>
 
-              <!-- Category dropdown -->
-              <form class="criteria-selection">
-                <label for="category-dropdown">Category: </label><br/>
-                <select id="category-dropdown" ng-model="findRstCtrl.category" ng-options="category.id as category.name for category in findRstCtrl.categories">
-                </select>
+      <span class="labels">Price range: </span><br>
+      <select id="price-dropdown" ng-model="findRstCtrl.price" ng-options="price.id as price.name for price in findRstCtrl.prices">
+      </select>
+    </form>
 
-                <br><br>
-                <label for="distance-dropdown">Distance: </label><br/>
-                <select id="distance-dropdown" ng-model="findRstCtrl.distance" ng-options="distance.id as distance.name for distance in findRstCtrl.distances">
-                </select>
+    <button class="btn btn-default" ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">Let's find your dinner.&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></button>
+  </div>
 
-                <br><br>
-                <label for="price-dropdown">Price Range: </label><br/>
-                <select id="price-dropdown" ng-model="findRstCtrl.price" ng-options="price.id as price.name for price in findRstCtrl.prices">
-                </select>
-              </form>
+  <!-- Restaurant results -->
+  <div ng-switch-when="4">
+    <div ng-if="findRstCtrl.restaurants.length > 0 && findRstCtrl.restaurants[findRstCtrl.currentRestaurant]">
+      <ul class="restaurant-result">
 
-              <br><br>
-          <!--     <button ng-click="findRstCtrl.previousPhase()">Previous</button> -->
-              <button class="btn btn-default" ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">Let's find your dinner.&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></button>
-            </div>
+        <li>
+          <a href="{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].url }}">
+            <h3>{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].name }}</h3>
+          </a>
+        </li>
 
-            <div ng-switch-when="4">
+        <li>
+          <span class="labels">Rating:</span> {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].rating }}
+        </li>
 
-              <div ng-if="findRstCtrl.restaurants.length > 0 && findRstCtrl.restaurants[findRstCtrl.currentRestaurant]">
-                <ul>
-                  <li>
-                    <a href="{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].url }}">
-                      <h3>{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].name }}</h3>
-                    </a>
-                  </li>
+        <li ng-if="findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address">
+          <span class="labels">Address:</span><br>
+          <span ng-repeat="address in findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address">
+            {{ address }}<br>
+          </span>
+        </li>
 
-                  <li>
-                    Rating: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].rating }}
-                  </li>
+        <li ng-if="findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone">
+          <span class="labels">Phone number:</span> {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone }}
+        </li>
 
-                  <li>
-                    Address: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address }}
-                  </li>
+        <li>
+          <span class="labels">Price range:</span> {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].price }}
+        </li>
 
-                  <li>
-                    Phone number: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone }}
-                  </li>
+      </ul>
 
-                  <li>
-                    Price: {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].price }}
-                  </li>
-                </ul>
-                <br>
-
-                <!-- Google Maps directions -->
-                <!-- Using ng-show below causes gmap to be cut off, so using ng-if instead -->
-                <div class="col-lg-offset-1">
-                  <ui-gmap-google-map control="findRstCtrl.directionsMap.control" center="findRstCtrl.directionsMap.center" zoom="findRstCtrl.directionsMap.zoom">
-                  </ui-gmap-google-map>
-                </div>
-
-                <br>
-
-                <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  Start over
-                </button>
-
-                <button class="btn btn-default" ng-show="findRstCtrl.currentRestaurant != 0" ng-click="findRstCtrl.previousRestaurant()">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  Previous restaurant
-                </button>
-
-                <button class="btn btn-default" ng-click="findRstCtrl.nextRestaurant()">
-                  I don't like this restaurant - give me the next best one.&nbsp;
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                </button>
-
-                <button class="btn btn-default" ng-click="findRstCtrl.saveToFavorites()">
-                  Add to favorites&nbsp;
-                  <span class="glyphicon glyphicon-heart"></span>
-                </button>
-
-              </div>
-
-            <div ng-if="findRstCtrl.restaurants.length > 0 && !findRstCtrl.restaurants[findRstCtrl.currentRestaurant]">
-              <h4>There are no more restaurants that match your criteria. Please try searching again!</h4>
-
-              <br>
-
-              <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                Start over
-              </button>
-
-            </div>
-
-            <div ng-if="findRstCtrl.restaurants.data.length === 0">
-              <h4>Your search didn't return any restaurants. Please try searching again!</h4>
-
-              <br>
-
-              <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                Start over
-              </button>
-
-            </div>
-
-          </div>
-        </div>
+      <!-- Google Maps directions -->
+      <!-- Using ng-show below causes gmap to be cut off, so using ng-if instead -->
+      <div class="col-md-offset-2 map">
+        <ui-gmap-google-map control="findRstCtrl.directionsMap.control" center="findRstCtrl.directionsMap.center" zoom="findRstCtrl.directionsMap.zoom">
+        </ui-gmap-google-map>
       </div>
-    </section>
+
+      <div class="rst-result-btns">
+
+        <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Start over
+        </button>
+
+        <button class="btn btn-default" ng-show="findRstCtrl.currentRestaurant != 0" ng-click="findRstCtrl.previousRestaurant()">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Previous restaurant
+        </button>
+
+        <button class="btn btn-default" ng-click="findRstCtrl.nextRestaurant()">
+          I don't like this restaurant - give me the next best one.&nbsp;
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+
+        <button class="btn btn-default" ng-click="findRstCtrl.saveToFavorites()">
+          Add to favorites&nbsp;
+          <span class="glyphicon glyphicon-heart"></span>
+        </button>
+
+      </div>
+    </div>
+
+    <div ng-if="findRstCtrl.restaurants.length > 0 && !findRstCtrl.restaurants[findRstCtrl.currentRestaurant]">
+      <h4>There are no more restaurants that match your criteria. Please try searching again!</h4>
+
+      <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        Start over
+      </button>
+
+    </div>
+
+    <div ng-if="findRstCtrl.restaurants.data.length === 0">
+      <h4>Your search didn't return any restaurants. Please try searching again!</h4>
+
+      <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        Start over
+      </button>
+
+    </div>
+
+  </div>
+</div>

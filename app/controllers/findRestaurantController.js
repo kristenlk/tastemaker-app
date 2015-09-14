@@ -145,9 +145,12 @@
       findRestaurantFactory.getRestaurants(url)
         .then(function(restaurants){
           vm.restaurants = restaurants;
+          console.log(vm.restaurants)
           if (restaurants.data.length === 0) {
             console.log('Your search didn\'t return any restaurants. Please try searching again!');
+            console.log(vm.restaurants.data.length);
           } else {
+            console.log(vm.restaurants.data.length);
             vm.restaurants = restaurants.data.sort(function(a, b){
               var ratingA = a.rating;
               var ratingB = b.rating;
@@ -159,7 +162,7 @@
               }
               return 0;
             });
-            console.log(vm.restaurants);
+            // console.log(vm.restaurants);
             // debugger;
             uiGmapGoogleMapApi.then(function(maps) {
               // stores maps in vm.maps so I can access it in redrawRoute() later on
