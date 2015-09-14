@@ -10,3 +10,7 @@
   <li>Phone number: {{ fav.display_phone }}</li>
   <li>URL: {{ fav.url }}</li>
 </ul>
+
+<h4 ng-show="favCtrl.favorites.length === 0">
+  You haven't saved any restaurants to your favorites yet.
+</h4>
