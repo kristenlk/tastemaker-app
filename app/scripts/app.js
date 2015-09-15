@@ -56,14 +56,14 @@
         redirectTo: '/'
       });
     }
-  ]).run(function($cookies, authFactory){
-    if ($.isEmptyObject(authFactory.currentUser) && $cookies.get('connect.sid')) {
-      authFactory.getCurrentUser();
+  ])//.run(function($cookies, authFactory){
+  //   if ($.isEmptyObject(authFactory.currentUser) && $cookies.get('connect.sid')) {
+  //     authFactory.getCurrentUser();
 
-    }
+  //   }
 
-    // console.log($cookies.get('connect.sid'));
-  });
+  //   console.log($cookies.get('connect.sid'));
+  // });
 
 })();
 

@@ -18,6 +18,15 @@
 
     init();
 
+    vm.deleteFromFavorites = function(favId) {
+      favoritesFactory.deleteFromFavorites(favId)
+        .success(function(){
+          console.log('Successfully deleted favorite.');
+        })
+        .error(function() {
+          console.log('Error deleting favorite.');
+        });
+    };
   };
 
   FavoritesController.$inject = ['favoritesFactory', 'appSettings'];

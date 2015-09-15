@@ -25,6 +25,10 @@
       return $http.post(appSettings.apiURL + '/account/favorites', restaurant)
     };
 
+    factory.deleteFromFavorites = function(favId){
+      return $http.delete(appSettings.apiURL + '/favorites/' + favId)
+    };
+
     return factory;
   };
 

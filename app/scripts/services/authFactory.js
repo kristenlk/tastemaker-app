@@ -10,7 +10,7 @@
     factory.login = function(formData){
       // debugger;
       return $http.post(appSettings.apiURL + '/login', formData).success(function(response){
-        angular.copy(response, factory.currentUser);
+        // angular.copy(response, factory.currentUser);
         factory.getCurrentUser();
         $location.path('/account');
       });
@@ -18,7 +18,7 @@
 
     factory.signup = function(formData){
       return $http.post(appSettings.apiURL + '/signup', formData).success(function(response){
-        angular.copy(response, factory.currentUser);
+        // angular.copy(response, factory.currentUser);
         factory.getCurrentUser();
         $location.path('/account');
       });
