@@ -13,7 +13,7 @@
 
     $routeProvider
       .when('/', {
-        templateUrl: '../app/views/welcome.html'
+        templateUrl: 'app/views/welcome.html'
       })
 
       .when('/login', {
