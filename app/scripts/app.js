@@ -19,37 +19,37 @@
       .when('/login', {
         controller: 'loginController',
         controllerAs: 'loginCtrl',
-        templateUrl: '../app/views/login.html'
+        templateUrl: 'app/views/login.html'
       })
 
       .when('/signup', {
         controller: 'signupController',
         controllerAs: 'signupCtrl',
-        templateUrl: '../app/views/signup.html'
+        templateUrl: 'app/views/signup.html'
       })
 
       .when('/logout', {
         controller: 'navbarController',
         controllerAs: 'navCtrl',
-        templateUrl: '../app/views/index.html'
+        templateUrl: 'app/views/index.html'
       })
 
       .when('/find-restaurant', {
         controller: 'findRestaurantController',
         controllerAs: 'findRstCtrl',
-        templateUrl: '../app/views/find-restaurant.html'
+        templateUrl: 'app/views/find-restaurant.html'
       })
 
       .when('/account', {
         controller: 'accountController',
         controllerAs: 'acctCtrl',
-        templateUrl: '../app/views/account.html'
+        templateUrl: 'app/views/account.html'
       })
 
       .when('/account/favorites', {
         controller: 'favoritesController',
         controllerAs: 'favCtrl',
-        templateUrl: '../app/views/favorites.html'
+        templateUrl: 'app/views/favorites.html'
       })
 
       .otherwise({
