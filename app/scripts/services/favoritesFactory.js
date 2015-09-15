@@ -1,6 +1,6 @@
 (function favoritesFactoryIIFE(){
 
-  var favoritesFactory = function($http, appSettings) {
+  var favoritesFactory = function($http, appSettings, $location) {
     var factory = {};
     factory.favorites = [];
 
@@ -22,13 +22,13 @@
       restaurant.longitude = data.location.coordinate.longitude;
       restaurant.price = data.price;
 
-      return $http.post(appSettings.apiURL + '/account/favorites', restaurant);
+      return $http.post(appSettings.apiURL + '/account/favorites', restaurant)
     };
 
     return factory;
   };
 
-  favoritesFactory.$inject = ['$http', 'appSettings'];
+  favoritesFactory.$inject = ['$http', 'appSettings', '$location'];
 
   angular.module('tastemakerApp').factory('favoritesFactory', favoritesFactory);
 

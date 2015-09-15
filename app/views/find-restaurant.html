@@ -86,7 +86,7 @@
         </ui-gmap-google-map>
       </div>
 
-      <div class="rst-result-btns">
+      <div class="rst-result-btns" ng-controller="navbarController as navCtrl">
 
         <button class="btn btn-default" ng-click="findRstCtrl.previousPhase()">
           <span class="glyphicon glyphicon-chevron-left"></span>
@@ -103,10 +103,14 @@
           <span class="glyphicon glyphicon-chevron-right"></span>
         </button>
 
-        <button class="btn btn-default" ng-click="findRstCtrl.saveToFavorites()">
+        <button class="btn btn-default" ng-if="navCtrl.isLoggedIn()" ng-click="findRstCtrl.saveToFavorites()">
           Add to favorites&nbsp;
           <span class="glyphicon glyphicon-heart"></span>
         </button>
+
+        <p ng-if="!navCtrl.isLoggedIn()">
+          To save restaurants to your favorites, <a href="#/login">log in</a> or <a href="#/signup">sign up</a>.
+        </p>
 
       </div>
     </div>

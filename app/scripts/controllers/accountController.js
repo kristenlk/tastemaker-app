@@ -13,6 +13,17 @@
 
     init();
 
+    vm.updateUser = function(){
+      authFactory.updateUser(vm.currentUser)
+        .success(function() {
+          console.log('User has been successfully updated.');
+        })
+        .error(function(data, status, headers, config) {
+          console.log("Error updating user: " + status);
+        });
+      // vm.master = angular.copy(vm.currentCustomer);
+    };
+
   };
 
   AccountController.$inject = ['authFactory', 'appSettings'];

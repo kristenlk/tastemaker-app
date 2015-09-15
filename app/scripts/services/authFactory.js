@@ -30,9 +30,9 @@
       });
     };
 
-    // factory.updateUser = function(){
-    //   return $http.patch(appSettings.apiURL + '/account/edit', factory.currentUser);
-    // };
+    factory.updateUser = function(formData){
+      return $http.patch(appSettings.apiURL + '/account/edit', formData);
+    };
 
     factory.logout = function(){
       return $http.get(appSettings.apiURL + '/logout').success(function(response){

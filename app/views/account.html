@@ -1,17 +1,19 @@
-<h3>My Account</h3>
+<div class="main-body">
+  <h3>My Account</h3>
 
-<!-- <h3>Welcome, {{ acctCtrl.currentUser.email }}</h3>
- -->
-<br/>
+  <!-- <h3>Welcome, {{ acctCtrl.currentUser.email }}</h3>
+   -->
+  <br/>
 
-<span class="labels">Email: </span><br>
-  <input type="text" id="email-acct" ng-model="acctCtrl.currentUser.email">
+  <span class="labels">Email: </span><br>
+    <input type="text" id="email-acct" ng-model="acctCtrl.currentUser.email">
 
-<button ng-click="acctCtrl.updateUser()" class="btn btn-default">Save</button>
+  <button ng-click="acctCtrl.updateUser()" class="btn btn-default">Save</button>
 
-<br>
-<br>
+  <br>
+  <br>
 
-<form method="link" action="#/account/favorites">
-  <input type="submit" value="My Favorites" class="btn btn-default">
-</form>
+  <form method="link" action="#/account/favorites">
+    <input type="submit" value="My Favorites" class="btn btn-default">
+  </form>
+</div>

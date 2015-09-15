@@ -31,10 +31,14 @@ h1 {
     vertical-align: middle;
     margin: 0;
     margin-top: 200px;
-    padding: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    padding-top: 5px;
     font-size: 100px;
     font-family: 'Enriqueta', serif;
     color: #FFF;
+    border: 3px solid #FFF;
 }
 
 h3 {
@@ -93,6 +97,12 @@ form {
     right:0;
     overflow: scroll; overflow-x:hidden;
     z-index: 1000000;
+}
+
+.main-body p {
+    font-size: 20px;
+    font-family: 'Enriqueta', serif;
+    color: #FFF;
 }
 
 .criteria-selection {
