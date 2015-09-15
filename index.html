@@ -12,10 +12,10 @@
   <title>Tastemaker | Let's find your dinner</title>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
   <!-- Custom CSS -->
-  <link href="styles/css/main.css" rel="stylesheet">
+  <link href="app/styles/css/main.css" rel="stylesheet">
 
   <!-- Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Enriqueta:400,700' rel='stylesheet' type='text/css'>
@@ -61,41 +61,42 @@
     </div>
   </nav>
 
-  <div class="col-md-8 col-md-offset-2 main-body">
+  <div class="col-md-8 col-md-offset-2">
     <div ng-view></div>
   </div>
 
   <!-- jQuery -->
-  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
 
   <!-- Bootstrap Core JavaScript -->
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <!-- AngularJS -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="node_modules/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-spinner/angular-spinner.js"></script>
   <script src="bower_components/spin.js/spin.js"></script>
+
   <!-- App -->
-  <script src='app/app.js'></script>
+  <script src='app/scripts/app.js'></script>
 
   <!-- Services -->
-  <script src='app/services/values.js'></script>
+  <script src='app/scripts/services/values.js'></script>
 
   <!-- Factories -->
-  <script src='app/services/findRestaurantFactory.js'></script>
-  <script src='app/services/authFactory.js'></script>
-  <script src='app/services/favoritesFactory.js'></script>
+  <script src='app/scripts/services/findRestaurantFactory.js'></script>
+  <script src='app/scripts/services/authFactory.js'></script>
+  <script src='app/scripts/services/favoritesFactory.js'></script>
 
   <!-- Controllers -->
-  <script src='app/controllers/findRestaurantController.js'></script>
-  <script src='app/controllers/loginController.js'></script>
-  <script src='app/controllers/accountController.js'></script>
-  <script src='app/controllers/favoritesController.js'></script>
-  <script src='app/controllers/navbarController.js'></script>
-  <script src='app/controllers/signupController.js'></script>
+  <script src='app/scripts/controllers/findRestaurantController.js'></script>
+  <script src='app/scripts/controllers/loginController.js'></script>
+  <script src='app/scripts/controllers/accountController.js'></script>
+  <script src='app/scripts/controllers/favoritesController.js'></script>
+  <script src='app/scripts/controllers/navbarController.js'></script>
+  <script src='app/scripts/controllers/signupController.js'></script>
 
   <!-- Angular Google Maps stuff -->
   <script src='bower_components/lodash/lodash.min.js'></script>

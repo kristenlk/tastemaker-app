@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 body {
     margin-top: 50px;
     background: url('../img/main-bg.jpeg') no-repeat center center fixed;
@@ -7,7 +11,6 @@ body {
     -o-background-size: cover;
     text-align: center;
     font-size: 16px;
-/*    color: #FFF;*/
     height:100%;
     width: 100%;
     margin: 0;
@@ -83,19 +86,14 @@ form {
 
 .main-body {
     background-color: rgba(16, 16, 16, 0.6);
-    height: 100%;
-    position: absolute;
+    height: 100vh;
     top:0;
     bottom:0;
     left:0;
     right:0;
     overflow: scroll; overflow-x:hidden;
-    z-index:-1;
+    z-index: 1000000;
 }
-/*
-.welcome {
-    background-color: transparent;
-}*/
 
 .criteria-selection {
     margin-top: 100px;
