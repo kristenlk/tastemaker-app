@@ -26,7 +26,7 @@
     };
 
     factory.deleteFromFavorites = function(favId){
-      return $http.delete(appSettings.apiURL + '/favorites/' + favId)
+      return $http.delete(appSettings.apiURL + '/account/favorites/' + favId)
     };
 
     return factory;
