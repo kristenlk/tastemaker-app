@@ -1,14 +1,24 @@
-<form>
-  <span class="labels">Email address: </span><br>
-  <input type="email" name="email-address"  ng-model="loginCtrl.loginForm.email" ng-required><br>
-  </select><br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="main-body">
+      <div class="outer-container">
+        <div class="outer-body">
+          <h3>Log In</h3>
+          <form>
+            <span class="labels">Email address: </span><br>
+            <input type="email" name="email-address"  ng-model="loginCtrl.loginForm.email" ng-required><br>
+            </select><br>
 
-  <span class="labels">Password: </span><br>
-  <input type="password" name="password"  ng-model="loginCtrl.loginForm.password" ng-minlength="6" ng-required><br>
-  </select><br>
+            <span class="labels">Password: </span><br>
+            <input type="password" name="password"  ng-model="loginCtrl.loginForm.password" ng-minlength="6" ng-required><br>
+            </select><br>
 
-  <button class="btn btn-default" ng-click="loginCtrl.login()">Log In</button>
+            <button class="btn btn-default" ng-click="loginCtrl.login()">Log In</button>
 
-<!--   <h1>{{ loginCtrl.currentUser }}</h1> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-</form>
