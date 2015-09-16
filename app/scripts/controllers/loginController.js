@@ -10,6 +10,7 @@
 
     this.login = function(){
       authFactory.login(this.loginForm).then(function(){
+        // debugger;
         authFactory.getCurrentUser();//.then(function(){
         //   debugger;
         // })

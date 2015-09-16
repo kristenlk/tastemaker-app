@@ -38,7 +38,7 @@ h1 {
     font-size: 100px;
     font-family: 'Enriqueta', serif;
     color: #FFF;
-    border: 3px solid #FFF;
+/*    border: 3px solid #FFF;*/
 }
 
 h3 {
@@ -83,6 +83,11 @@ h4 {
     font-size: 20px;
     font-family: 'Enriqueta', serif;
 }
+
+/*.navbar-header {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}*/
 
 form {
     margin-top: 50px;
@@ -129,4 +134,29 @@ form {
 
 .location-detection {
     margin-top: 100px;
+}
+
+.btn {
+    border-radius: 0;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    font-size: 18px;
+}
+
+.btn-default {
+    border: 1px solid #FFF;
+    color: #FFF;
+    background-color: transparent;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+/*    border: 1px solid #FFF;*/
+/*    outline: 0;*/
+    color: #383838 ;
+    background-color: #FFF;
 }
