@@ -1,19 +1,19 @@
-<div class="main-body">
-  <h3>My Account</h3>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="main-body">
+      <div class="outer-container">
+        <div class="outer-body">
+          <h3>My Account</h3>
 
-  <!-- <h3>Welcome, {{ acctCtrl.currentUser.email }}</h3>
-   -->
-  <br/>
+          <span class="labels">Email: </span><br>
+            <input type="text" id="email-acct" ng-model="acctCtrl.currentUser.email"><br><br>
 
-  <span class="labels">Email: </span><br>
-    <input type="text" id="email-acct" ng-model="acctCtrl.currentUser.email">
+          <button ng-click="acctCtrl.updateUser()" class="btn btn-default">Save changes</button><br><br><br>
 
-  <button ng-click="acctCtrl.updateUser()" class="btn btn-default">Save</button>
-
-  <br>
-  <br>
-
-  <form method="link" action="#/account/favorites">
-    <input type="submit" value="My Favorites" class="btn btn-default">
-  </form>
+<!--           <a href="#/account/favorites" class="btn btn-default" role="button">My Favorites <span class="glyphicon glyphicon-chevron-right"></span></a> -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

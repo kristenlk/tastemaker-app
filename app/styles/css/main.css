@@ -21,9 +21,15 @@ a:hover {
     color: #FFF;
 }
 
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
 li {
     list-style-type: none;
     color: #FFF;
+    margin:0px auto;
 }
 
 h1 {
@@ -107,9 +113,9 @@ h4 {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }*/
 
-form {
+/*form {
     margin-top: 50px;
-}
+}*/
 
 /* Creates darkened background on certain views */
 .main-body {
@@ -181,7 +187,7 @@ form {
     background-color: #101010;
 }
 
-/* Welcome page */
+/* Setting up alignment */
 .outer-container {
     display: table;
     width: 100%;
@@ -194,4 +200,14 @@ form {
 .outer-container .outer-body {
     display: table-cell;
     vertical-align: middle;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+/* Alignment for Favorites section */
+.favorites > .outer-container {
+    margin-top: 0px;
 }

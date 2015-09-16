@@ -1,39 +1,48 @@
-<div class="main-body">
-  <h3>My Favorites</h3>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="main-body favorites">
+      <div class="outer-container">
+        <div class="outer-body">
+          <h3>My Favorites</h3>
 
-  <div ng-repeat="fav in favCtrl.favorites">
-    <ul id="{{ fav.id }}">
-      <li>
-        <h4>{{ fav.name }}</h4>
-      </li>
-      <li>
-        <span class="labels">Rating:</span>
-          {{ fav.rating }} stars
-      </li>
-      <li>
-        <span class="labels">Price range:</span>
-        {{ fav.price }}
-      </li>
-      <li>
-        <span class="labels">Address:</span>
-        <span ng-repeat="address in fav.display_address">
-        {{ address }}
-        </span>
-      </li>
-      <li ng-if="fav.display_phone">
-        <span class="labels">Phone number:</span>
-        {{ fav.display_phone }}
-      </li>
-      <li>
-        <span class="labels">URL:</span>
-        {{ fav.url }}
-      </li>
-    </ul>
-    <br>
-    <button ng-click="favCtrl.deleteFromFavorites(fav.id)" class="btn btn-default">Delete</button>
+          <div ng-repeat="fav in favCtrl.favorites">
+            <ul id="{{ fav.id }}">
+              <li>
+                <h4>{{ fav.name }}</h4>
+              </li>
+              <li>
+                <span class="labels">Rating:</span>
+                  {{ fav.rating }} stars
+              </li>
+              <li>
+                <span class="labels">Price range:</span>
+                {{ fav.price }}
+              </li>
+              <li>
+                <span class="labels">Address:</span>
+                <span ng-repeat="address in fav.display_address">
+                {{ address }}
+                </span>
+              </li>
+              <li ng-if="fav.display_phone">
+                <span class="labels">Phone number:</span>
+                {{ fav.display_phone }}
+              </li>
+              <li>
+                <span class="labels">URL:</span>
+                {{ fav.url }}
+              </li>
+            </ul>
+            <br>
+            <button ng-click="favCtrl.deleteFromFavorites(fav.id)" class="btn btn-default">Delete</button>
 
+          </div>
+          <h4 ng-show="favCtrl.favorites.length === 0">
+            You haven't saved any restaurants to your favorites yet.
+          </h4>
+        </div>
+      </div>
+    </div>
   </div>
-  <h4 ng-show="favCtrl.favorites.length === 0">
-    You haven't saved any restaurants to your favorites yet.
-  </h4>
 </div>
+
