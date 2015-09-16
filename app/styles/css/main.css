@@ -61,18 +61,18 @@ h1 {
 
 @media(max-width: 560px) {
   h1 {
-    font-size: 40px;
+    font-size: 38px;
   }
 }
 
 h3 {
     text-align: center;
-    vertical-align: middle;
+/*    vertical-align: middle;*/
     margin: 0;
 /*    margin-top: 70px;*/
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 0;
-    font-size: 50px;
+    font-size: 40px;
     font-family: 'Enriqueta', serif;
     color: #FFF;
 }
@@ -81,8 +81,8 @@ h4 {
     text-align: center;
     vertical-align: middle;
     margin: 0;
-    margin-top: 70px;
-    margin-bottom: 20px;
+/*    margin-top: 70px;*/
+    margin-bottom: 10px;
     padding: 0;
     font-size: 30px;
     font-family: 'Enriqueta', serif;
@@ -98,8 +98,8 @@ h4 {
 
 
 .angular-google-map-container {
-    width: 550px;
-    height: 400px;
+    width: 450px;
+    height: 300px;
 /*    margin-left:15px;*/
 }
 
@@ -149,18 +149,18 @@ h4 {
     color: #FFF;
 }
 
-.restaurant-result li {
-    margin-top: 10px;
+.restaurant-results li {
+    margin-top: 2px;
 }
 
-.rst-result-btns {
+/*.rst-result-btns {
     margin-bottom: 20px;
-}
+}*/
 
-.location-detection {
+/*.location-detection {
     margin-top: 100px;
 }
-
+*/
 /* Buttons */
 .btn {
     border-radius: 0;
@@ -189,6 +189,12 @@ h4 {
 
 /* Setting up alignment */
 .outer-container {
+/*    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 100px 0px 100px;
+    text-align: center;
+    margin-top: 120px;*/
     display: table;
     width: 100%;
     height: auto;
@@ -207,7 +213,44 @@ h4 {
     margin-left: 0px;
 }
 
-/* Alignment for Favorites section */
+/* Alignment / styling for Favorites section */
 .favorites > .outer-container {
     margin-top: 0px;
+    padding-bottom: 0px;
+}
+
+.favorites .btn {
+    margin-top: 10px;
+}
+
+.favorites h3 {
+    margin-bottom: 20px;
+}
+
+/* Alignment for Location Verification section */
+.location-verification > .outer-container {
+    margin-top: 100px;
+    padding-top: 0px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 0px;
+}
+
+/* Alignment for Criteria section */
+.criteria > .outer-container {
+    margin-top: 0px;
+}
+
+/* Alignment for Restaurant Results section */
+.restaurant-results > .outer-container {
+    margin-top: 0px;
+    padding-top: 60px;
+    padding-bottom: 0px;
+}
+
+/* Alignment for Restaurant Results section when there are no results */
+.no-results > .outer-container {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 0px;
 }
