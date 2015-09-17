@@ -2,7 +2,7 @@
 
 (function loginControllerIIFE() {
 
-  var LoginController = function(authFactory, appSettings) {
+  var LoginController = function(authFactory, favoritesFactory, appSettings) {
     this.loginForm = {};
     this.loginForm.email = '';
     this.loginForm.password = '';
@@ -11,14 +11,16 @@
     this.login = function(){
       authFactory.login(this.loginForm).then(function(){
         // debugger;
-        authFactory.getCurrentUser();//.then(function(){
+        authFactory.getCurrentUser()//.then(function(){
+          //favoritesFactory.getFavorites();
+        //});//.then(function(){
         //   debugger;
         // })
       });
     }
   };
 
-  LoginController.$inject = ['authFactory', 'appSettings'];
+  LoginController.$inject = ['authFactory', 'favoritesFactory', 'appSettings'];
 
   angular.module('tastemakerApp').controller('loginController', LoginController);
 

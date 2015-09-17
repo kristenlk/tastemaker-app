@@ -7,6 +7,8 @@
     factory.getFavorites = function(){
       return $http.get(appSettings.apiURL + '/account/favorites').success(function(response){
         angular.copy(response, factory.favorites);
+        console.log('factory.favorites: ')
+        console.log(factory.favorites);
       });
     };
 

@@ -1,5 +1,5 @@
 html {
-    height: 100%;
+/*    height: 100%;*/
 }
 
 body {
@@ -11,7 +11,7 @@ body {
     -o-background-size: cover;
     text-align: center;
     font-size: 16px;
-    height:100%;
+    height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -29,7 +29,7 @@ ul {
 li {
     list-style-type: none;
     color: #FFF;
-    margin:0px auto;
+    margin: 0px auto;
 }
 
 h1 {
@@ -45,24 +45,6 @@ h1 {
     font-family: 'Enriqueta', serif;
     color: #FFF;
 /*    border: 3px solid #FFF;*/
-}
-
-@media(max-width: 950px) {
-  h1 {
-    font-size: 80px;
-  }
-}
-
-@media(max-width: 750px) {
-  h1 {
-    font-size: 60px;
-  }
-}
-
-@media(max-width: 560px) {
-  h1 {
-    font-size: 38px;
-  }
 }
 
 h3 {
@@ -89,20 +71,8 @@ h4 {
     color: #FFF;
 }
 
-.map {
-    margin-top: 20px;
-    margin-bottom: 20px;
-/*    width: 500px;
-    height: 400px;*/
-}
 
-
-.angular-google-map-container {
-    width: 450px;
-    height: 300px;
-/*    margin-left:15px;*/
-}
-
+/* Navbar */
 .navbar-brand {
     font-size: 20px;
     font-family: 'Enriqueta', serif;
@@ -127,6 +97,7 @@ h4 {
     right:0;
     overflow: scroll; overflow-x:hidden;
     z-index: 1000000;
+    width: 100%;
 }
 
 .main-body p {
@@ -135,22 +106,11 @@ h4 {
     color: #FFF;
 }
 
-.criteria-selection {
-    margin-top: 100px;
-}
-
-.criteria-selection select {
-    margin-bottom: 20px;
-}
-
+/* Labels for drop-downs etc. */
 .labels {
-    font-size: 20px;
+    font-size: 18px;
     font-family: 'Enriqueta', serif;
     color: #FFF;
-}
-
-.restaurant-results li {
-    margin-top: 2px;
 }
 
 /*.rst-result-btns {
@@ -162,7 +122,7 @@ h4 {
 }
 */
 /* Buttons */
-.btn {
+.button {
     border-radius: 0;
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -173,14 +133,14 @@ h4 {
     font-size: 18px;
 }
 
-.btn-default {
-    border: 2px solid #101010;
-    color: #101010;
-    background-color: #FFF;
+.button.btn-default {
+    border: 2px solid #FFF;
+    color: #FFF;
+    background-color: transparent;
 }
 
-.btn-default:hover,
-.btn-default:focus {
+.button.btn-default:hover,
+.button.btn-default:focus {
     border: 2px solid #101010;
     outline:none;
     color: #FFF;
@@ -214,7 +174,7 @@ h4 {
 }
 
 /* Alignment / styling for Favorites section */
-.favorites > .outer-container {
+.favorites .outer-container {
     margin-top: 0px;
     padding-bottom: 0px;
 }
@@ -228,7 +188,7 @@ h4 {
 }
 
 /* Alignment for Location Verification section */
-.location-verification > .outer-container {
+.location-verification .outer-container {
     margin-top: 100px;
     padding-top: 0px;
     padding-left: 100px;
@@ -237,20 +197,139 @@ h4 {
 }
 
 /* Alignment for Criteria section */
-.criteria > .outer-container {
+.criteria .outer-container {
     margin-top: 0px;
 }
 
-/* Alignment for Restaurant Results section */
-.restaurant-results > .outer-container {
+/*.criteria-selection {
+    margin-top: 100px;
+}
+*/
+.criteria-selection select {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* Alignment / styling for Restaurant Results section */
+.restaurant-results .outer-container {
     margin-top: 0px;
-    padding-top: 60px;
     padding-bottom: 0px;
+    margin-bottom: 0px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 60px;
+}
+
+.restaurant-results li {
+    margin-top: 2px;
+}
+
+.restaurant-results a {
+    color: #FFF;
+}
+
+.restaurant-results .btn {
+    margin-bottom: 10px;
 }
 
 /* Alignment for Restaurant Results section when there are no results */
-.no-results > .outer-container {
+.no-results .outer-container {
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 0px;
+}
+
+/* Google Maps */
+
+/*.map-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: blue;
+/*    margin: 0 auto;*/
+
+/*
+@media(max-width: 680px) {
+  .map-container {
+    width: 60vw;
+    height: 40vh;
+  }
+}*/
+
+.angular-google-map {
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.angular-google-map-container {
+    width: 70%;
+    height: 325px;
+    margin: 0 auto;
+/*    margin-left:15px;*/
+}
+
+/* Media queries */
+@media(max-width: 1250px) {
+  .angular-google-map-container {
+    width: 85%;
+  }
+
+}
+
+@media(max-width: 1000px) {
+  h1 {
+    font-size: 80px;
+  }
+
+  .angular-google-map-container {
+    width: 75%;
+  }
+
+}
+
+@media(max-width: 750px) {
+  h1 {
+    font-size: 60px;
+  }
+}
+
+
+@media(max-width: 600px) {
+  h1 {
+    font-size: 38px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  h4 {
+    font-size: 23px;
+  }
+
+  .location-verification > h3 {
+    margin-top: 100px;
+    margin-bottom: -80px;
+    padding: 0;
+  }
+
+  .location-verification .outer-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .restaurant-results .outer-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .angular-google-map-container {
+    height: 40vh;
+    width: 90%;
+  }
+
+  .button {
+    margin: 5px;
+  }
+
 }
