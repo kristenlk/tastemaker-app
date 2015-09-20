@@ -9,7 +9,6 @@
 
     function init(){
       favoritesFactory.getFavorites().then(function(favorites){
-        console.log(vm.favorites);
         for (var i = 0; i < vm.favorites.length; i++) {
           // console.log("vm.favorites[i].favorite.id: ")
           // console.log(vm.favorites[i].favorite.id)

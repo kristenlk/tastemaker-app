@@ -219,20 +219,11 @@
       vm.currentRestaurant++;
       // If there is a restaurant past the one you're on, redraw the maps route.
       if (vm.restaurants[vm.currentRestaurant]) {
+        // debugger;
         redrawRoute();
       } else {
         console.log('There are no more restaurants that match your criteria. Please try searching again!')
       }
-    }
-
-  // Decrements phase of restaurant finding process
-    vm.previousRestaurant = function(){
-      vm.currentRestaurant--;
-      redrawRoute();
-    }
-
-    vm.saveToFavorites = function(){
-      favoritesFactory.saveToFavorites(vm.restaurants[vm.currentRestaurant]);
     }
 
     function redrawRoute(){
@@ -260,6 +251,32 @@
         }
       })
     };
+
+    vm.inFavorites = function(currRstId){
+      for (var i = 0; i < favoritesFactory.favorites.length; i++) {
+        if (currRstId === favoritesFactory.favorites[i].restaurant.yelp_id) {
+          return true;
+        }
+      }
+    };
+
+  // Decrements phase of restaurant finding process
+    vm.previousRestaurant = function(){
+      vm.currentRestaurant--;
+      redrawRoute();
+    }
+
+    vm.saveToFavorites = function(){
+      favoritesFactory.saveToFavorites(vm.restaurants[vm.currentRestaurant])
+      // Gets favorites so "Save to Favorites" button is dynamically updated
+        .success(function(){
+          favoritesFactory.getFavorites();
+        })
+        .error(function() {
+          console.log('Error getting favorite.');
+        });;
+    }
+
 }
 
     // uiGmapGoogleMapApi.

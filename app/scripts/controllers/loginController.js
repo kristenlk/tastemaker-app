@@ -12,10 +12,9 @@
       authFactory.login(this.loginForm).then(function(){
         // debugger;
         authFactory.getCurrentUser()//.then(function(){
-          //favoritesFactory.getFavorites();
-        //});//.then(function(){
-        //   debugger;
-        // })
+          //favoritesFactory.getFavorites().then(function(){
+            //console.log(favoritesFactory.favorites);
+          //})
       });
     }
   };

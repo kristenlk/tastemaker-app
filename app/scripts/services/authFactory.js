@@ -12,7 +12,7 @@
       return $http.post(appSettings.apiURL + '/login', formData).success(function(response){
         // angular.copy(response, factory.currentUser);
         factory.getCurrentUser();
-        $location.path('/account');
+        $location.path('/account/favorites');
       });
     };
 

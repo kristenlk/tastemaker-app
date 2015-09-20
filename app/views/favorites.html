@@ -5,7 +5,7 @@
         <div class="outer-body">
           <h3>My Favorites</h3>
 
-          <div ng-repeat="fav in favCtrl.favorites">
+          <div ng-repeat="fav in favCtrl.favorites track by $index">
             <ul id="{{fav.favorite.id}}">
               <li>
                 <h4>{{ fav.restaurant.name }}</h4>

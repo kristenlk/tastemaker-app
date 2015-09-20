@@ -262,8 +262,8 @@ h4 {
 }
 
 .angular-google-map-container {
-    width: 70%;
-    height: 325px;
+    width: 68%;
+    height: 300px;
     margin: 0 auto;
 /*    margin-left:15px;*/
 }
@@ -296,7 +296,7 @@ h4 {
 
 @media(max-width: 600px) {
   h1 {
-    font-size: 38px;
+    font-size: 35px;
   }
 
   h3 {
@@ -332,4 +332,12 @@ h4 {
     margin: 5px;
   }
 
+}
+
+.saved:hover:before {
+    content:"View favorites"
+}
+
+.saved:hover span {
+    display: none;
 }
