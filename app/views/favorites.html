@@ -33,8 +33,11 @@
                 {{ fav.restaurant.url }}
               </li>
             </ul>
-<!--             <br> -->
-            <button id="fav{{fav.favorite.id}}" ng-click="favCtrl.deleteFromFavorites($event)" class="button btn btn-default">Delete</button>
+
+            <a class="button btn btn-default" role="button" ng-click="favCtrl.deleteFromFavorites($event)">
+              Delete
+            </a>
+
             <br><br><br>
           </div>
           <h4 ng-show="favCtrl.favorites.length === 0">

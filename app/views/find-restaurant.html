@@ -27,8 +27,16 @@
           </div>
         </div>
 
-        <button class="button btn btn-default" ng-click="findRstCtrl.previousPhase()"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Not where I am</button>
-        <button class="button btn btn-default" ng-click="findRstCtrl.nextPhase()">This is correct&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></button>
+        <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase()">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          Not where I am
+        </a>
+
+        <a class="button btn btn-default" role="button" ng-click="findRstCtrl.nextPhase()">
+          This is correct
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
       </div>
 
       <!-- Criteria selection -->
@@ -54,7 +62,11 @@
             </form>
             <br>
 
-            <button class="button btn btn-default" ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">This way to deliciousness&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></button>
+            <a class="button btn btn-default" role="button" ng-click="findRstCtrl.nextPhase(); findRstCtrl.getRestaurant()">
+              This way to deliciousness
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+
           </div>
         </div>
       </div>
@@ -111,17 +123,19 @@
 
                 <br>
 
-                <a class="button btn btn-default" role="button" g-if="navCtrl.isLoggedIn() && !findRstCtrl.inFavorites(findRstCtrl.restaurants[findRstCtrl.currentRestaurant].id)" ng-click="findRstCtrl.saveToFavorites()">
+                <a class="button btn btn-default" role="button" ng-if="navCtrl.isLoggedIn() && !findRstCtrl.inFavorites(findRstCtrl.restaurants[findRstCtrl.currentRestaurant].id)" ng-click="findRstCtrl.saveToFavorites()">
                   Save to favorites
                   <span class="glyphicon glyphicon-heart-empty"></span>
                 </a>
 
                 <a href="#/account/favorites" class="button btn btn-default saved" role="button" ng-if="navCtrl.isLoggedIn() && findRstCtrl.inFavorites(findRstCtrl.restaurants[findRstCtrl.currentRestaurant].id)"><span>Saved </span><span class="glyphicon glyphicon-heart"></span></a>
 
-                <button class="button btn btn-default" ng-click="findRstCtrl.previousPhase()">
+                <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase()">
                   New search
-                </button>
+                </a>
+
                 <br>
+
                 <p ng-if="!navCtrl.isLoggedIn()">
                   To save restaurants to your favorites, <a href="#/login">log in</a> or <a href="#/signup">sign up</a>.
                 </p>
@@ -138,25 +152,24 @@
               <div ng-if="findRstCtrl.restaurants.length > 0 && !findRstCtrl.restaurants[findRstCtrl.currentRestaurant]">
                 <h4>There are no more restaurants that match your criteria. Please try searching again!</h4>
                 <br>
-                <button class="button btn btn-default" ng-show="findRstCtrl.currentRestaurant != 0" ng-click="findRstCtrl.previousRestaurant()">
+
+                <a class="button btn btn-default" role="button" ng-show="findRstCtrl.currentRestaurant != 0" ng-click="findRstCtrl.previousRestaurant()">
                   <span class="glyphicon glyphicon-chevron-left"></span>
                   Previous
-                </button>
+                </a>
 
-                <button class="button btn btn-default" ng-click="findRstCtrl.previousPhase()">
-                  <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
+                <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase()">
                   New search
-                </button>
+                </a>
 
               </div>
 
               <div ng-if="findRstCtrl.restaurants.data.length === 0">
                 <h4>Your search didn't return any restaurants. Please try searching again!</h4>
                 <br>
-                <button class="button btn btn-default" ng-click="findRstCtrl.previousPhase()">
-                  <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
+                <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase()">
                   New search
-                </button>
+                </a>
 
               </div>
 
