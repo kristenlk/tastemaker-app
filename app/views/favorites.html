@@ -8,6 +8,7 @@
           <div ng-repeat="fav in favCtrl.favorites track by $index">
             <ul id="{{fav.favorite.id}}">
               <li>
+                <a href="{{ fav.restaurant.url }}" target="_blank">
                 <h4>{{ fav.restaurant.name }}</h4>
               </li>
               <li>
@@ -20,17 +21,13 @@
               </li>
               <li>
                 <span class="labels">Address:</span>
-                <span ng-repeat="address in fav.restaurant.display_address">
+                <span ng-repeat="address in fav.restaurant.display_address track by $index">
                 {{ address }}
                 </span>
               </li>
               <li ng-if="fav.restaurant.display_phone">
                 <span class="labels">Phone number:</span>
                 {{ fav.restaurant.display_phone }}
-              </li>
-              <li>
-                <span class="labels">URL:</span>
-                {{ fav.restaurant.url }}
               </li>
             </ul>
 

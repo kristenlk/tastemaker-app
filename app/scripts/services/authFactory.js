@@ -11,6 +11,7 @@
       // debugger;
       return $http.post(appSettings.apiURL + '/login', formData).success(function(response){
         // angular.copy(response, factory.currentUser);
+        simpleStorage.set('loggedIn', true);
         factory.getCurrentUser();
         $location.path('/account/favorites');
       });
@@ -19,6 +20,7 @@
     factory.signup = function(formData){
       return $http.post(appSettings.apiURL + '/signup', formData).success(function(response){
         // angular.copy(response, factory.currentUser);
+        simpleStorage.set('loggedIn', true);
         factory.getCurrentUser();
         $location.path('/account');
       });
@@ -37,6 +39,7 @@
     factory.logout = function(){
       return $http.get(appSettings.apiURL + '/logout').success(function(response){
         factory.currentUser = {};
+        simpleStorage.flush();
         $location.path('/');
       });
     };

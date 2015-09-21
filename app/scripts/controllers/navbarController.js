@@ -6,7 +6,8 @@
 
     vm.isLoggedIn = function(){
       // return ($cookies.get('connect.sid'));
-      return authFactory.currentUser.id !== undefined;
+      // return authFactory.currentUser.id !== undefined;
+      return simpleStorage.get("loggedIn") !== undefined;
     }
 
     vm.logout = function(){
