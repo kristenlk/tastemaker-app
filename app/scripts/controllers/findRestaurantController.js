@@ -44,6 +44,7 @@
       { id: 'foodtrucks', name: 'Food Trucks' },
       { id: 'french', name: 'French' },
       { id: 'gastropubs', name: 'Gastropubs' },
+      { id: 'german', name: 'German' },
       { id: 'gluten_free', name: 'Gluten-Free' },
       { id: 'greek', name: 'Greek' },
       { id: 'icecream', name: 'Ice Cream & Frozen Yogurt' },
@@ -57,9 +58,12 @@
       { id: 'mideastern', name: 'Middle Eastern' },
       { id: 'moroccan', name: 'Moroccan' },
       { id: 'pizza', name: 'Pizza' },
+      { id: 'pubfood', name: 'Pub Food' },
+      { id: 'sandwiches', name: 'Sandwiches' },
       { id: 'seafood', name: 'Seafood' },
       { id: 'southern', name: 'Southern' },
       { id: 'thai', name: 'Thai' },
+      { id: 'vegan', name: 'Vegan' },
       { id: 'vegetarian', name: 'Vegetarian' },
       { id: 'vietnamese', name: 'Vietnamese' },
     ];
@@ -93,7 +97,6 @@
           longitude: position.coords.longitude
         }
 
-        // Why isn't this working...?
         $timeout(function() {
           vm.formPhase++;
         }, 500);
