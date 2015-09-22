@@ -1,16 +1,22 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <div class="main-body">
+    <div class="main-body account">
       <div class="outer-container">
-        <div class="outer-body">
+        <div class="outer-body" ng-controller="navbarController as navCtrl">
           <h3>My Account</h3>
+          <div ng-if="navCtrl.isLoggedIn()">
+            <span class="labels">Email: </span><br>
+              <input type="text" id="email-acct" ng-model="acctCtrl.currentUser.email"><br><br>
 
-          <span class="labels">Email: </span><br>
-            <input type="text" id="email-acct" ng-model="acctCtrl.currentUser.email"><br><br>
+            <a class="button btn btn-default" role="button" ng-click="acctCtrl.updateUser()">
+              Save changes
+            </a>
+          </div>
 
-          <a class="button btn btn-default" role="button" ng-click="acctCtrl.updateUser()">
-            Save changes
-          </a>
+          <h4 ng-if="!navCtrl.isLoggedIn()">
+            You must be logged in to view this page.
+          </h4>
+
           <br><br><br>
 
         </div>

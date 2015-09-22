@@ -2,44 +2,56 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="main-body favorites">
       <div class="outer-container">
-        <div class="outer-body">
+        <div class="outer-body" ng-controller="navbarController as navCtrl">
           <h3>My Favorites</h3>
 
-          <div ng-repeat="fav in favCtrl.favorites track by $index">
-            <ul id="{{fav.favorite.id}}">
-              <li>
-                <a href="{{ fav.restaurant.url }}" target="_blank">
-                <h4>{{ fav.restaurant.name }}</h4>
-              </li>
-              <li>
-                <span class="labels">Rating:</span>
-                  {{ fav.restaurant.rating }} stars
-              </li>
-              <li>
-                <span class="labels">Price range:</span>
-                {{ fav.restaurant.price }}
-              </li>
-              <li>
-                <span class="labels">Address:</span>
-                <span ng-repeat="address in fav.restaurant.display_address track by $index">
-                {{ address }}
-                </span>
-              </li>
-              <li ng-if="fav.restaurant.display_phone">
-                <span class="labels">Phone number:</span>
-                {{ fav.restaurant.display_phone }}
-              </li>
-            </ul>
+          <div ng-if="navCtrl.isLoggedIn()" ng-repeat="fav in favCtrl.favorites">
 
-            <a class="button btn btn-default" role="button" ng-click="favCtrl.deleteFromFavorites($event)">
-              Delete
-            </a>
+            <div ng-if="favCtrl.favorites.length > 0">
 
-            <br><br><br>
+              <ul id="{{fav.restaurant.id}}">
+                <li>
+                  <a href="{{ fav.restaurant.url }}" target="_blank">
+                  <h4>{{ fav.restaurant.name }}</h4>
+                  </a>
+                </li>
+                <li>
+                  <span class="labels">Rating:</span>
+                    {{ fav.restaurant.rating }} stars
+                </li>
+                <li>
+                  <span class="labels">Price range:</span>
+                  {{ fav.restaurant.price }}
+                </li>
+                <li>
+                  <span class="labels">Address:</span>
+                  <span ng-repeat="address in fav.restaurant.display_address track by $index">
+                  {{ address }}
+                  </span>
+                </li>
+                <li ng-if="fav.restaurant.display_phone">
+                  <span class="labels">Phone number:</span>
+                  {{ fav.restaurant.display_phone }}
+                </li>
+              </ul>
+
+              <a class="button btn btn-default" role="button" ng-click="favCtrl.deleteFromFavorites(fav.favorite.id)">
+                Delete
+              </a>
+
+              <br><br><br>
+            </div>
+
+            <h4 ng-if="favCtrl.favorites.length === 0">
+              You haven't saved any restaurants to your favorites yet.
+            </h4>
+
           </div>
-          <h4 ng-show="favCtrl.favorites.length === 0">
-            You haven't saved any restaurants to your favorites yet.
+
+          <h4 ng-if="!navCtrl.isLoggedIn()">
+            You must be logged in to view this page.
           </h4>
+
         </div>
       </div>
     </div>
