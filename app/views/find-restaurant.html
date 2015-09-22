@@ -5,9 +5,12 @@
       <!-- Location detection -->
       <div ng-switch-when="1">
         <div class="outer-container">
-          <div class="outer-body">
+          <div class="outer-body location-detection">
+            <div class="spinner-container center-block">
             <h3>Detecting your location...</h3>
-            <!-- Eventually put an animation here -->
+
+            <span us-spinner="{radius:30, width:7, length: 15, color: '#FFF'}"></span>
+             </div>
           </div>
         </div>
       </div>
@@ -66,18 +69,29 @@
               This way to deliciousness
               <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
+          </div>
+        </div>
+      </div>
 
+      <!-- Finding restaurant results -->
+      <div ng-switch-when="4">
+        <div class="outer-container finding-restaurant">
+          <div class="outer-body">
+            <h3>Finding the perfect restaurant...</h3>
+            <div class="spinner-container">
+              <span us-spinner="{radius:30, width:8, length: 16, color: '#FFF'}"></span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Restaurant results -->
-      <div ng-switch-when="4">
+      <div ng-switch-when="5">
         <div ng-if="findRstCtrl.restaurants.length > 0 && findRstCtrl.restaurants[findRstCtrl.currentRestaurant]" class="restaurant-results">
           <div class="outer-container">
             <div class="outer-body">
-              <ul>
 
+              <ul>
                 <li>
                   <a href="{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].url }}" target="_blank">
                     <h3>{{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].name }}</h3>
@@ -130,7 +144,7 @@
 
                 <a href="#/account/favorites" class="button btn btn-default saved" role="button" ng-if="navCtrl.isLoggedIn() && findRstCtrl.inFavorites(findRstCtrl.restaurants[findRstCtrl.currentRestaurant].id)"><span>Saved </span><span class="glyphicon glyphicon-heart"></span></a>
 
-                <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase()">
+                <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase(); findRstCtrl.previousPhase()">
                   New search
                 </a>
 
@@ -158,7 +172,7 @@
                   Previous
                 </a>
 
-                <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase()">
+                <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase(); findRstCtrl.previousPhase()">
                   New search
                 </a>
 

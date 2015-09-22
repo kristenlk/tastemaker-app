@@ -2,8 +2,7 @@
   /* Additional globals */
   "predef": [
     "define",
-    "module",
-    "require"
+    "module"
   ],
 
   /* Enforcing Options */
@@ -20,7 +19,13 @@
   /* Relaxing Options */
 
   "asi"           : true,   // Switches off warnings about missing semi-colons
+  "boss"          : true,   // Switches off warnings about assignments in places where conditions are expected
+  "evil"          : true,   // Switches off warnings about the use of eval
+  "expr"          : true,   // Switches off warnings when using expressions in places where assignments are expected
+  "laxbreak"      : true,   // Switches off warnings about improper line breaks
   "laxcomma"      : true,   // Switches off warnings about leading commas in multi-line var declarations
+  "loopfunc"      : true,   // Switches off warnings about functions inside of loops
+  "proto"         : true,   // Switches off warnings when using the __proto__ property
 
   /* Environments */
 

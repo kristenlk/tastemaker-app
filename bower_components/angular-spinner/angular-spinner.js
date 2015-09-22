@@ -1,10 +1,8 @@
 /**
- * angular-spinner version 0.7.0
+ * angular-spinner version 0.6.2
  * License: MIT.
  * Copyright (C) 2013, 2014, 2015, Uri Shaked and contributors.
  */
-
-'format amd';
 
 (function (root) {
 	'use strict';
@@ -13,8 +11,6 @@
 
 		return angular
 			.module('angularSpinner', [])
-
-			.constant('SpinJSSpinner', Spinner)
 
 			.provider('usSpinnerConfig', function () {
 				var _config = {};
@@ -45,10 +41,12 @@
 				return config;
 			}])
 
-			.directive('usSpinner', ['SpinJSSpinner', 'usSpinnerConfig', function (SpinJSSpinner, usSpinnerConfig) {
+			.directive('usSpinner', ['$window', 'usSpinnerConfig', function ($window, usSpinnerConfig) {
 				return {
 					scope: true,
 					link: function (scope, element, attr) {
+						var SpinnerConstructor = Spinner || $window.Spinner;
+
 						scope.spinner = null;
 
 						scope.key = angular.isDefined(attr.spinnerKey) ? attr.spinnerKey : false;
@@ -79,12 +77,12 @@
 
 							options = options || {};
 							for (var property in usSpinnerConfig.config) {
-								if (options[property] === undefined) {
-									options[property] = usSpinnerConfig.config[property];
-								}
+							    if (options[property] === undefined) {
+							        options[property] = usSpinnerConfig.config[property];
+							    }
 							}
 
-							scope.spinner = new SpinJSSpinner(options);
+							scope.spinner = new SpinnerConstructor(options);
 							if (!scope.key || scope.startActive) {
 								scope.spinner.spin(element[0]);
 							}
@@ -113,12 +111,9 @@
 
 	if (typeof define === 'function' && define.amd) {
 		/* AMD module */
-		define(['angular', 'spin.js'], factory);
-	} else if (typeof module !== 'undefined' && module && module.exports) {
-		/* CommonJS module */
-		module.exports = factory(require('angular'), require('spin.js'));
+		define(['angular', 'spin'], factory);
 	} else {
 		/* Browser global */
-		factory(root.angular, root.Spinner);
+		factory(root.angular);
 	}
-}(window || global));
+}(window));

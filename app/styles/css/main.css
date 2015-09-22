@@ -173,6 +173,11 @@ h4 {
     margin-left: 0px;
 }
 
+/* Alignment / styling for Account section */
+.account h3 {
+    margin-bottom: 20px;
+}
+
 /* Alignment / styling for Favorites section */
 .favorites .outer-container {
     margin-top: 0px;
@@ -232,6 +237,15 @@ h4 {
     margin-bottom: 10px;
 }
 
+/* Saved / View Favorites button on restaurant results page */
+.saved:hover:before {
+    content:"View favorites"
+}
+
+.saved:hover span {
+    display: none;
+}
+
 /* Alignment for Restaurant Results section when there are no results */
 .no-results .outer-container {
     padding-left: 100px;
@@ -268,6 +282,7 @@ h4 {
 /*    margin-left:15px;*/
 }
 
+
 /* Media queries */
 @media(max-width: 1250px) {
   .angular-google-map-container {
@@ -296,15 +311,20 @@ h4 {
 
 @media(max-width: 600px) {
   h1 {
-    font-size: 35px;
-  }
-
-  h3 {
     font-size: 30px;
   }
 
+  h3 {
+    font-size: 25px;
+  }
+
   h4 {
-    font-size: 23px;
+    font-size: 20px;
+  }
+
+  .location-detection h3 {
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
   .location-verification > h3 {
@@ -314,13 +334,13 @@ h4 {
   }
 
   .location-verification .outer-container {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .restaurant-results .outer-container {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .angular-google-map-container {
@@ -329,15 +349,16 @@ h4 {
   }
 
   .button {
-    margin: 5px;
+    margin: 3px;
+    font-size: 15px;
   }
 
-}
+  .find-rsts .outer-container {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
 
-.saved:hover:before {
-    content:"View favorites"
-}
-
-.saved:hover span {
-    display: none;
+  .restaurant-results .outer-container {
+    padding-top: 60px;
+  }
 }

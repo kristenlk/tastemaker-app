@@ -8,6 +8,7 @@
     vm.favorites = favoritesFactory.favorites;
 
     function init(){
+      // debugger;
       favoritesFactory.getFavorites().then(function(favorites){
         for (var i = 0; i < vm.favorites.length; i++) {
           // console.log("vm.favorites[i].favorite.id: ")
@@ -21,10 +22,11 @@
 
     init();
 
-    vm.deleteFromFavorites = function(event) {
+    vm.deleteFromFavorites = function(id) {
       // Grabs id of itself. Work-around because passing in {{fav.favorite.id}} into favCtrl.deleteFromFavorites() in the view wasn't working
-      var favoriteToDelete = +event.target.id.substr(3, event.target.id.length);
-      favoritesFactory.deleteFromFavorites(+event.target.id.substr(3, event.target.id.length))
+      // var favoriteToDelete = +event.target.id.substr(3, event.target.id.length);
+      // debugger;
+      favoritesFactory.deleteFromFavorites(id)
         .success(function(){
           init();
         })

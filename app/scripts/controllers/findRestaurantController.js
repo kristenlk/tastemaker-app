@@ -1,6 +1,6 @@
 (function findRestaurantControllerIIFE(){
 
-  var FindRestaurantController = function(findRestaurantFactory, favoritesFactory, appSettings, $timeout, uiGmapGoogleMapApi){
+  var FindRestaurantController = function(findRestaurantFactory, favoritesFactory, appSettings, $timeout, uiGmapGoogleMapApi, usSpinnerService){
     var vm = this;
     vm.appSettings = appSettings;
     vm.formPhase = 1;
@@ -147,7 +147,10 @@
 
       findRestaurantFactory.getRestaurants(url)
         .then(function(restaurants){
+          vm.formPhase++;
           vm.restaurants = restaurants;
+          // Gets favorites so "Save to Favorites" / "Saved" button is always correct. Prior to this, I was only getting restaurants after a user saves something to their favorites or looks at their favorites.
+          favoritesFactory.getFavorites();
           console.log(vm.restaurants)
           if (restaurants.data.length === 0) {
             console.log('Your search didn\'t return any restaurants. Please try searching again!');
@@ -283,7 +286,7 @@
 }
 
     // uiGmapGoogleMapApi.
-  FindRestaurantController.$inject = ['findRestaurantFactory', 'favoritesFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi'];
+  FindRestaurantController.$inject = ['findRestaurantFactory', 'favoritesFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi', 'usSpinnerService'];
 
   angular.module('tastemakerApp').controller('findRestaurantController', FindRestaurantController);
 
