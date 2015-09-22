@@ -11,7 +11,7 @@
       // debugger;
       return $http.post(appSettings.apiURL + '/login', formData).success(function(response){
         // angular.copy(response, factory.currentUser);
-        simpleStorage.set('loggedIn', true);
+        simpleStorage.set('loggedIn', true, {TTL: 72000000});
         factory.getCurrentUser();
         $location.path('/account/favorites');
       });
@@ -20,7 +20,7 @@
     factory.signup = function(formData){
       return $http.post(appSettings.apiURL + '/signup', formData).success(function(response){
         // angular.copy(response, factory.currentUser);
-        simpleStorage.set('loggedIn', true);
+        simpleStorage.set('loggedIn', true, {TTL: 72000000});
         factory.getCurrentUser();
         $location.path('/account');
       });
