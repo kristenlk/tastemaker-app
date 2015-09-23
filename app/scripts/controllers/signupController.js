@@ -3,18 +3,42 @@
 (function signupControllerIIFE() {
 
   var SignupController = function(authFactory, appSettings) {
-    this.signupForm = {};
-    this.signupForm.email = '';
-    this.signupForm.password = '';
-    this.currentUser = authFactory.currentUser;
+    var vm = this;
+    vm.signupForm = {};
+    vm.signupForm.email = '';
+    vm.signupForm.password = '';
+    vm.currentUser = authFactory.currentUser;
+    vm.notUnique = false;
+    vm.miscSignupErrors = false;
 
-    this.signup = function(){
-      authFactory.signup(this.signupForm).then(function(){
-        authFactory.getCurrentUser();//.then(function(){
-        // })
-      });
+    vm.signup = function(){
+      authFactory.signup(vm.signupForm)
+        .then(function(response){
+          console.log(response);
+          // Checking if response has an error in it. Workaround for error handling not functioning as I expected.
+          // If there is an error, iterate through errors. Check what type of error it is.
+          if (response.data.error.errors) {
+            response.data.error.errors.forEach(function(error){
+              if (error.message === "email must be unique") {
+                return vm.notUnique = true;
+              } else if (error.message) {
+                return vm.miscSignupErrors = true;
+              }
+            });
+          }
+
+          authFactory.getCurrentUser();
+
+        })
     }
-  };
+
+    vm.clearErrors = function(){
+      vm.notUnique = false;
+      vm.miscSignupErrors = false;
+    }
+
+  }
+
 
   SignupController.$inject = ['authFactory', 'appSettings'];
 

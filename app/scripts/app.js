@@ -1,5 +1,5 @@
 (function tastemakerAppIIFE(){
-  var app = angular.module('tastemakerApp', ['uiGmapgoogle-maps', 'ngRoute', 'ngCookies', 'ngLoadingSpinner']);
+  var app = angular.module('tastemakerApp', ['uiGmapgoogle-maps', 'ngRoute', 'ngCookies', 'ngLoadingSpinner', 'ngMessages']);
 
   app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', '$httpProvider', function($routeProvider, uiGmapGoogleMapApiProvider, $httpProvider){
 

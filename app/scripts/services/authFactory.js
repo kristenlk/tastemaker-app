@@ -18,12 +18,17 @@
     };
 
     factory.signup = function(formData){
-      return $http.post(appSettings.apiURL + '/signup', formData).success(function(response){
-        // angular.copy(response, factory.currentUser);
-        simpleStorage.set('loggedIn', true, {TTL: 72000000});
-        factory.getCurrentUser();
-        $location.path('/account');
-      });
+      return $http.post(appSettings.apiURL + '/signup', formData)
+        .success(function(response){
+          // Checking if response has an error in it. Workaround for error handling not functioning as I expected
+          if (response.error) {
+            return response.error;
+          }
+          simpleStorage.set('loggedIn', true, {TTL: 72000000});
+          factory.getCurrentUser();
+          $location.path('/account');
+
+        });
     };
 
     factory.getCurrentUser = function(){

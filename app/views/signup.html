@@ -4,7 +4,7 @@
       <div class="outer-container">
         <div class="outer-body">
           <h3>Sign Up</h3>
-          <form>
+<!--           <form>
             <span class="labels">Email address: </span><br>
             <input type="email" name="email-address"  ng-model="signupCtrl.signupForm.email" ng-required><br>
             </select><br>
@@ -18,6 +18,54 @@
             </a>
 
           </form>
+ -->
+          <form name="signupForm" novalidate class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+
+            <div class="form-group" ng-class="{ 'has-error': signupForm.email.$touched && signupForm.email.$invalid }">
+              <label><span class="labels">Email</span></label>
+              <input type="email" name="email" class="form-control"
+                ng-model="signupCtrl.signupForm.email"
+                required
+                >
+
+              <div class="help-block" ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
+                <span ng-message="required">Please enter an email address.</span>
+                <span ng-message="email">Please enter a valid email.</span>
+              </div>
+
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': signupForm.password.$touched && signupForm.password.$invalid }">
+              <label><span class="labels">Password</span></label>
+              <input type="password" name="password" class="form-control"
+                ng-model="signupCtrl.signupForm.password"
+                ng-minlength="6"
+                required
+                >
+
+              <div class="help-block" ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
+                <span ng-message="required">Please enter a password.</span>
+                <span ng-message="minlength">Your password must contain at least 6 characters.</p>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <a class="button btn btn-default" role="button" type="submit" ng-click="signupCtrl.signup(); signupCtrl.clearErrors()">
+                Sign Up
+              </a>
+            </div>
+
+            <div class="alert alert-danger alert-dismissible" ng-show="signupCtrl.notUnique">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <span><i class="icon fa fa-ban"></i>This email is already registered with Tastemaker. Want to <a href="#/login">log in</a>?</span>
+            </div>
+
+            <div class="alert alert-danger alert-dismissible" ng-show="signupCtrl.miscSignupErrors">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <span><i class="icon fa fa-ban"></i>There was a problem with the email address or password you entered. Please try again.</span>
+            </div>
+
         </div>
       </div>
     </div>

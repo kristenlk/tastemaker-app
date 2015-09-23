@@ -52,7 +52,7 @@ h3 {
 /*    vertical-align: middle;*/
     margin: 0;
 /*    margin-top: 70px;*/
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 0;
     font-size: 40px;
     font-family: 'Enriqueta', serif;
@@ -111,6 +111,7 @@ h4 {
     font-size: 18px;
     font-family: 'Enriqueta', serif;
     color: #FFF;
+    margin-bottom: 4px;
 }
 
 /*.rst-result-btns {
@@ -361,4 +362,12 @@ h4 {
   .restaurant-results .outer-container {
     padding-top: 60px;
   }
+}
+
+.has-error .form-control {
+    border-color: #d9534f;
+}
+
+.has-error .help-block {
+    color: #d9534f;
 }
