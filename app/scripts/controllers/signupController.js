@@ -8,7 +8,9 @@
     vm.signupForm.email = '';
     vm.signupForm.password = '';
     vm.currentUser = authFactory.currentUser;
+    // Error if non-unique email is entered
     vm.notUnique = false;
+    // Other errors
     vm.miscSignupErrors = false;
 
     vm.signup = function(){

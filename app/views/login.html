@@ -4,50 +4,19 @@
       <div class="outer-container">
         <div class="outer-body">
           <h3>Log In</h3>
-<!--           <form name="loginForm">
-            <span class="labels">Email address: </span><br>
-            <input type="email" name="email"
-                   ng-model="loginCtrl.loginForm.email"
-                   ng-required
-                   ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }"
-            >
-
-            <span ng-messages="loginForm.email.$error">
-              <span ng-message="required">This field is required.</span>
-              <span ng-message="email">Please enter a valid email address.</span>
-            </span>
-            <br>
-            <br>
-
-            <span class="labels">Password: </span><br>
-            <input type="password" name="password"
-                   ng-model="loginCtrl.loginForm.password"
-                   ng-minlength="6"
-                   ng-required
-            >
-            <br>
-            <br>
-
-            <a class="button btn btn-default" role="button" ng-click="loginCtrl.login()">
-              Log In
-            </a>
-
-          </form> -->
-
 
           <form name="loginForm" novalidate class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
 
             <div class="form-group" ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }">
               <label><span class="labels">Email</span></label>
-              <input type="email" name="email" class="form-control"
+              <input type="text" name="email" class="form-control"
                 ng-model="loginCtrl.loginForm.email"
                 required
                 >
 
-<!--               <div class="help-block" ng-messages="loginForm.email.$error" ng-if="loginForm.email.$touched">
-                <span ng-message="required">Your email is required.</span>
-                <span ng-message="email">Please enter a valid email.</span>
-              </div> -->
+              <div class="help-block" ng-messages="loginForm.email.$error" ng-if="loginForm.email.$touched">
+                <span ng-message="required">Please enter your email address.</span>
+              </div>
 
             </div>
 
@@ -55,24 +24,25 @@
               <label><span class="labels">Password</span></label>
               <input type="password" name="password" class="form-control"
                 ng-model="loginCtrl.loginForm.password"
-                ng-minlength="6"
                 required
                 >
 
-<!--               <div class="help-block" ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
-                <span ng-message="required">Please enter a password.</span>
-                <span ng-message="minlength">Your password must be at least 6 characters.</p>
+              <div class="help-block" ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
+                <span ng-message="required">Please enter your password.</span>
               </div>
- -->
+
             </div>
 
             <div class="form-group">
-              <a class="button btn btn-default" role="button" type="submit" ng-click="loginCtrl.login()">
+              <a class="button btn btn-default" role="button" type="submit" ng-click="loginCtrl.login(); loginCtrl.clearErrors()">
                 Log In
               </a>
             </div>
 
-
+            <div class="alert alert-danger alert-dismissible" ng-show="loginCtrl.loginErrors">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <span><i class="icon fa fa-ban"></i>We were unable to locate an account with that email address and password combination. Please try again.</span>
+            </div>
 
           </form>
 

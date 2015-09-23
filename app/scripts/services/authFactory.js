@@ -6,10 +6,11 @@
 
     factory.currentUser = {};
     factory.currentUser.favorites = {};
+    //factory.error;
 
     factory.login = function(formData){
       // debugger;
-      return $http.post(appSettings.apiURL + '/login', formData).success(function(response){
+      return $http.post(appSettings.apiURL + '/login', formData).success(function(){
         // angular.copy(response, factory.currentUser);
         simpleStorage.set('loggedIn', true, {TTL: 72000000});
         factory.getCurrentUser();
