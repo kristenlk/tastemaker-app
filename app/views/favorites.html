@@ -42,11 +42,11 @@
               <br><br><br>
             </div>
 
-            <h4 ng-if="favCtrl.favorites.length === 0">
+          </div>
+
+            <h4 ng-if="navCtrl.isLoggedIn() && favCtrl.favorites.length === 0">
               You haven't saved any restaurants to your favorites yet.
             </h4>
-
-          </div>
 
           <h4 ng-if="!navCtrl.isLoggedIn()">
             You must be logged in to view this page.
