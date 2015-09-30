@@ -293,16 +293,18 @@ h4 {
 }
 
 @media(max-width: 1000px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+@media(max-width: 1000px) {
   h1 {
     font-size: 80px;
   }
 
   .angular-google-map-container {
     width: 75%;
-  }
-
-  body {
-    background-attachment: scroll;
   }
 
 }
