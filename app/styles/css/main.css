@@ -4,7 +4,7 @@ html {
 
 body {
     margin-top: 50px;
-    background: url('../img/main-bg.jpeg') no-repeat center center fixed;
+    background: url('../img/main-bg.jpeg') no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -292,12 +292,6 @@ h4 {
 
 }
 
-@media(max-width: 1024px) {
-  body {
-    background-attachment: scroll;
-  }
-}
-
 @media(max-width: 1000px) {
   h1 {
     font-size: 80px;
@@ -376,4 +370,55 @@ h4 {
 
 .has-error .help-block {
     color: #d9534f;
+}
+
+
+/* Background image fixes */
+
+/* fix for the ipad */
+@media (min-device-width : 768px) and (max-device-width : 1024px)  {
+    #home {
+        background-attachment: scroll;
+        /* default height landscape*/
+        height: 768px;
+    }
+
+    .ipadfix{
+        height: 300px !important;
+    }
+    img.ipadfix{
+        width:100% !important;
+        height:auto !important;
+    }
+}
+/* fix for the ipad */
+@media (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: portrait) {
+    #home {
+        /* default height landscape*/
+        height: 1024px;
+    }
+}
+
+/* fix for the iphone */
+@media (min-device-width : 320px) and (max-device-width : 568px)  {
+    #home {
+        background-attachment: scroll;
+        /* default height landscape*/
+        height: 320px;
+    }
+
+    .ipadfix{
+        height: 150px !important;
+    }
+    img.ipadfix{
+        width:100% !important;
+        height:auto !important;
+    }
+}
+/* fix for the iphone */
+@media (min-device-width : 320px) and (max-device-width : 568px) and (orientation: portrait) {
+    #home {
+        /* default height landscape*/
+        height: 568px;
+    }
 }
