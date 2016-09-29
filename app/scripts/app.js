@@ -1,9 +1,9 @@
+if (window.location.protocol != "https:") {
+  window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+}
+
 (function tastemakerAppIIFE(){
   var app = angular.module('tastemakerApp', ['uiGmapgoogle-maps', 'ngRoute', 'ngCookies', 'ngLoadingSpinner', 'ngMessages']);
-
-  if (window.location.protocol != "https:") {
-    window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
-  }
 
   app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', '$httpProvider', function($routeProvider, uiGmapGoogleMapApiProvider, $httpProvider){
 
