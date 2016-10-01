@@ -23,6 +23,7 @@
       // Setting vm.restaurants to an empty object to account for when a user presses the back button. Prior to doing so, when a user selected new criteria and pressed enter, they saw the old message / restaurant until the new results loaded.
       vm.restaurants = {}
       vm.currentRestaurant = 0;
+      // debugger;
     }
 
     vm.category = 'mexican';
@@ -100,6 +101,12 @@
           vm.formPhase++;
         }, 500);
 
+        console.log('Your current position is ' + vm.pos.latitude + ', ' + vm.pos.longitude)
+        // if (vm.pos.latitude && vm.pos.longitude) {
+        //   vm.nextPhase();
+        // }
+        // return vm.formPhase;
+
       // Yelp
 
       uiGmapGoogleMapApi.then(function(maps) {
@@ -122,6 +129,7 @@
           }
         ];
       });
+
     });
   }
 
@@ -137,12 +145,11 @@
       url += vm.distance;
       url += '&price=' + vm.price
 
-      console.log(url);
       findRestaurantFactory.getRestaurants(url)
         .then(function(restaurants){
           vm.formPhase++;
           vm.restaurants = restaurants;
-          // Gets favorites so "Save to Favorites" / "Saved" button is always correct.
+          // Gets favorites so "Save to Favorites" / "Saved" button is always correct. Prior to this, I was only getting restaurants after a user saves something to their favorites or looks at their favorites.
           favoritesFactory.getFavorites();
           console.log(vm.restaurants)
           if (restaurants.data.length === 0) {
@@ -218,6 +225,7 @@
       vm.currentRestaurant++;
       // If there is a restaurant past the one you're on, redraw the maps route.
       if (vm.restaurants[vm.currentRestaurant]) {
+        // debugger;
         redrawRoute();
       } else {
         console.log('There are no more restaurants that match your criteria. Please try searching again!')
@@ -225,6 +233,8 @@
     }
 
     function redrawRoute(){
+      console.log(vm.currentRestaurant);
+      // debugger;
       vm.route = {
         origin: new vm.maps.LatLng(
           vm.pos.latitude,
@@ -239,6 +249,7 @@
 
       vm.directionsService.route(vm.route, function(response, status){
         if (status === google.maps.DirectionsStatus.OK) {
+          // debugger;
           vm.directionsDisplay.setDirections(response);
           vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
         } else {
@@ -271,8 +282,10 @@
           console.log('Error getting favorite.');
         });;
     }
+
 }
 
+    // uiGmapGoogleMapApi.
   FindRestaurantController.$inject = ['findRestaurantFactory', 'favoritesFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi', 'usSpinnerService'];
 
   angular.module('tastemakerApp').controller('findRestaurantController', FindRestaurantController);
