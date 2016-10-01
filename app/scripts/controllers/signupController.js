@@ -1,7 +1,6 @@
 'use strict';
 
 (function signupControllerIIFE() {
-
   var SignupController = function(authFactory, appSettings) {
     var vm = this;
     vm.signupForm = {};
@@ -10,7 +9,6 @@
     vm.currentUser = authFactory.currentUser;
     // Error if non-unique email is entered
     vm.notUnique = false;
-    // Other errors
     vm.miscSignupErrors = false;
 
     vm.signup = function(){
@@ -30,7 +28,6 @@
           }
 
           authFactory.getCurrentUser();
-
         })
     }
 
@@ -38,9 +35,7 @@
       vm.notUnique = false;
       vm.miscSignupErrors = false;
     }
-
   }
-
 
   SignupController.$inject = ['authFactory', 'appSettings'];
 

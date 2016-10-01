@@ -23,7 +23,6 @@
       // Setting vm.restaurants to an empty object to account for when a user presses the back button. Prior to doing so, when a user selected new criteria and pressed enter, they saw the old message / restaurant until the new results loaded.
       vm.restaurants = {}
       vm.currentRestaurant = 0;
-      // debugger;
     }
 
     vm.category = 'mexican';
@@ -101,12 +100,6 @@
           vm.formPhase++;
         }, 500);
 
-        console.log('Your current position is ' + vm.pos.latitude + ', ' + vm.pos.longitude)
-        // if (vm.pos.latitude && vm.pos.longitude) {
-        //   vm.nextPhase();
-        // }
-        // return vm.formPhase;
-
       // Yelp
 
       uiGmapGoogleMapApi.then(function(maps) {
@@ -129,7 +122,6 @@
           }
         ];
       });
-
     });
   }
 
@@ -149,71 +141,62 @@
         .then(function(restaurants){
           vm.formPhase++;
           vm.restaurants = restaurants;
-          // Gets favorites so "Save to Favorites" / "Saved" button is always correct. Prior to this, I was only getting restaurants after a user saves something to their favorites or looks at their favorites.
+          // Gets favorites so "Save to Favorites" / "Saved" button is always correct.
           favoritesFactory.getFavorites();
-          console.log(vm.restaurants)
-          if (restaurants.data.length === 0) {
-            console.log('Your search didn\'t return any restaurants. Please try searching again!');
-            console.log(vm.restaurants.data.length);
-          } else {
-            console.log(vm.restaurants.data.length);
-            vm.restaurants = restaurants.data.sort(function(a, b){
-              var ratingA = a.rating;
-              var ratingB = b.rating;
-              if (ratingA < ratingB) {
-                return 1;
-              }
-              if (ratingA > ratingB) {
-                return -1;
-              }
-              return 0;
-            });
-            // console.log(vm.restaurants);
-            // debugger;
-            uiGmapGoogleMapApi.then(function(maps) {
-              // stores maps in vm.maps so I can access it in redrawRoute() later on
-              vm.maps = maps;
-              vm.directionsMap = {
-                control: {},
-                center: {
-                  latitude: vm.pos.latitude,
-                  longitude: vm.pos.longitude
-                },
-                zoom: areaZoom
-              };
-              vm.options = {
-                scrollwheel: false
-              };
 
-              vm.directionsService = new maps.DirectionsService();
-              vm.directionsDisplay = new maps.DirectionsRenderer();
+          vm.restaurants = restaurants.data.sort(function(a, b){
+            var ratingA = a.rating;
+            var ratingB = b.rating;
+            if (ratingA < ratingB) {
+              return 1;
+            }
+            if (ratingA > ratingB) {
+              return -1;
+            }
+            return 0;
+          });
 
-              vm.route = {
-                origin: new maps.LatLng(
-                  vm.pos.latitude,
-                  vm.pos.longitude
-                ),
-                destination: new maps.LatLng(
-                  vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
-                  vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
-                ),
-                travelMode: maps.TravelMode['DRIVING']
-              };
+          uiGmapGoogleMapApi.then(function(maps) {
+            // stores maps in vm.maps so I can access it in redrawRoute() later on
+            vm.maps = maps;
+            vm.directionsMap = {
+              control: {},
+              center: {
+                latitude: vm.pos.latitude,
+                longitude: vm.pos.longitude
+              },
+              zoom: areaZoom
+            };
+            vm.options = {
+              scrollwheel: false
+            };
 
-              vm.directionsService.route(vm.route, function(response, status){
-                if (status === google.maps.DirectionsStatus.OK) {
-                  // debugger;
-                  vm.directionsDisplay.setDirections(response);
-                  vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
-                } else {
-                  console.log('Directions unsuccessful');
-                }
-              })
+            vm.directionsService = new maps.DirectionsService();
+            vm.directionsDisplay = new maps.DirectionsRenderer();
 
-            });
-          }
+            vm.route = {
+              origin: new maps.LatLng(
+                vm.pos.latitude,
+                vm.pos.longitude
+              ),
+              destination: new maps.LatLng(
+                vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
+                vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
+              ),
+              travelMode: maps.TravelMode['DRIVING']
+            };
+
+            vm.directionsService.route(vm.route, function(response, status){
+              // if (status === google.maps.DirectionsStatus.OK) {
+              vm.directionsDisplay.setDirections(response);
+              vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
+            })
+
+          });
+
           // then get restaurant
         }, function(data, status, headers, config){
+          console.log(vm.restaurants);
           console.log('Error getting restaurants.');
         });
       };
@@ -225,7 +208,6 @@
       vm.currentRestaurant++;
       // If there is a restaurant past the one you're on, redraw the maps route.
       if (vm.restaurants[vm.currentRestaurant]) {
-        // debugger;
         redrawRoute();
       } else {
         console.log('There are no more restaurants that match your criteria. Please try searching again!')
@@ -233,8 +215,6 @@
     }
 
     function redrawRoute(){
-      console.log(vm.currentRestaurant);
-      // debugger;
       vm.route = {
         origin: new vm.maps.LatLng(
           vm.pos.latitude,
@@ -249,7 +229,6 @@
 
       vm.directionsService.route(vm.route, function(response, status){
         if (status === google.maps.DirectionsStatus.OK) {
-          // debugger;
           vm.directionsDisplay.setDirections(response);
           vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
         } else {
@@ -282,10 +261,8 @@
           console.log('Error getting favorite.');
         });;
     }
-
 }
 
-    // uiGmapGoogleMapApi.
   FindRestaurantController.$inject = ['findRestaurantFactory', 'favoritesFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi', 'usSpinnerService'];
 
   angular.module('tastemakerApp').controller('findRestaurantController', FindRestaurantController);

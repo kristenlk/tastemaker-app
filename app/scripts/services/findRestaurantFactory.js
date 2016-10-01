@@ -11,11 +11,6 @@
       });
     };
 
-    // factory.getRestaurant = function(restaurantId){
-      //
-
-    // }
-
     return factory;
   };
 
