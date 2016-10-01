@@ -150,7 +150,6 @@
           vm.formPhase++;
           vm.restaurants = restaurants;
           // Gets favorites so "Save to Favorites" / "Saved" button is always correct. Prior to this, I was only getting restaurants after a user saves something to their favorites or looks at their favorites.
-          favoritesFactory.getFavorites();
           console.log(vm.restaurants)
           if (restaurants.data.length === 0) {
             console.log('Your search didn\'t return any restaurants. Please try searching again!');
