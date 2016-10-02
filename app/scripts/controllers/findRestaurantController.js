@@ -79,14 +79,14 @@
       { id: '8046', name: '5 miles' }
     ];
 
-    vm.price = '$$';
+    vm.price = 2;
 
     // ids are distances in meters (as defined by Yelp API)
     vm.prices = [
-      { id: '$', name: '$' },
-      { id: '$$', name: '$$ (and below)' },
-      { id: '$$$', name: '$$$ (and below)' },
-      { id: '$$$$', name: '$$$$ (and below)' }
+      { id: 1, name: '$' },
+      { id: 2, name: '$$ (and below)' },
+      { id: 3, name: '$$$ (and below)' },
+      { id: 4, name: '$$$$ (and below)' }
     ];
 
     // Get geolocation
@@ -137,11 +137,13 @@
 
     vm.getRestaurant = function(){
       var url = '';
-      url = '/restaurant?category_filter=';
+      url = '/restaurant?categories=';
       url += vm.category;
-      url += '&sort=2&ll=';
-      url += vm.pos.latitude + ',' + vm.pos.longitude;
-      url += '&radius_filter=';
+      url += '&sort=2&latitude=';
+      url += vm.pos.latitude;
+      url += '&longitude=';
+      url += vm.pos.longitude;
+      url += '&radius=';
       url += vm.distance;
       url += '&price=' + vm.price
 
@@ -150,13 +152,14 @@
           vm.formPhase++;
           vm.restaurants = restaurants;
           // Gets favorites so "Save to Favorites" / "Saved" button is always correct. Prior to this, I was only getting restaurants after a user saves something to their favorites or looks at their favorites.
-          console.log(vm.restaurants)
           if (restaurants.data.length === 0) {
             console.log('Your search didn\'t return any restaurants. Please try searching again!');
-            console.log(vm.restaurants.data.length);
           } else {
-            console.log(vm.restaurants.data.length);
-            vm.restaurants = restaurants.data.sort(function(a, b){
+            vm.restaurants = JSON.parse(restaurants.data);
+            if (vm.restaurants.businesses.length === 0) {
+              return;
+            }
+            vm.restaurants = vm.restaurants.businesses.sort(function(a, b){
               var ratingA = a.rating;
               var ratingB = b.rating;
               if (ratingA < ratingB) {
@@ -167,8 +170,7 @@
               }
               return 0;
             });
-            // console.log(vm.restaurants);
-            // debugger;
+
             uiGmapGoogleMapApi.then(function(maps) {
               // stores maps in vm.maps so I can access it in redrawRoute() later on
               vm.maps = maps;
@@ -193,8 +195,8 @@
                   vm.pos.longitude
                 ),
                 destination: new maps.LatLng(
-                  vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
-                  vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
+                  vm.restaurants[vm.currentRestaurant].coordinates.latitude,
+                  vm.restaurants[vm.currentRestaurant].coordinates.longitude
                 ),
                 travelMode: maps.TravelMode['DRIVING']
               };
@@ -224,7 +226,6 @@
       vm.currentRestaurant++;
       // If there is a restaurant past the one you're on, redraw the maps route.
       if (vm.restaurants[vm.currentRestaurant]) {
-        // debugger;
         redrawRoute();
       } else {
         console.log('There are no more restaurants that match your criteria. Please try searching again!')
@@ -233,15 +234,15 @@
 
     function redrawRoute(){
       console.log(vm.currentRestaurant);
-      // debugger;
+;
       vm.route = {
         origin: new vm.maps.LatLng(
           vm.pos.latitude,
           vm.pos.longitude
         ),
         destination: new vm.maps.LatLng(
-          vm.restaurants[vm.currentRestaurant].location.coordinate.latitude,
-          vm.restaurants[vm.currentRestaurant].location.coordinate.longitude
+          vm.restaurants[vm.currentRestaurant].coordinates.latitude,
+          vm.restaurants[vm.currentRestaurant].coordinates.longitude
         ),
         travelMode: vm.maps.TravelMode['DRIVING']
       };

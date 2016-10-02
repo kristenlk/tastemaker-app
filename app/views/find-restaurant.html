@@ -102,15 +102,13 @@
                   <span class="labels">Rating: </span> {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].rating }} <span class="glyphicon glyphicon-star"></span>
                 </li>
 
-                <li ng-if="findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address">
+                <li ng-if="findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.address1">
                   <span class="labels">Address: </span><br>
-                  <span ng-repeat="address in findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.display_address">
-                    {{ address }}
-                  </span>
+                  <span>{{findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.address1}}, {{findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.city}}, {{findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.state}} {{findRstCtrl.restaurants[findRstCtrl.currentRestaurant].location.zip_code}}</span>
                 </li>
 
                 <li ng-if="findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone">
-                  <span class="labels">Phone: </span> {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].display_phone }}
+                  <span class="labels">Phone: </span> {{ findRstCtrl.restaurants[findRstCtrl.currentRestaurant].phone }}
                 </li>
 
                 <li>
@@ -178,7 +176,7 @@
 
               </div>
 
-              <div ng-if="findRstCtrl.restaurants.data.length === 0">
+              <div ng-if="findRstCtrl.restaurants.businesses.length === 0">
                 <h4>Your search didn't return any restaurants. Please try searching again!</h4>
                 <br>
                 <a class="button btn btn-default" role="button" ng-click="findRstCtrl.previousPhase(); findRstCtrl.previousPhase()">
