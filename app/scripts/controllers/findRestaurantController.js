@@ -20,10 +20,8 @@
   // Decrements phase of restaurant finding process
     vm.previousPhase = function(){
       vm.formPhase--;
-      // Setting vm.restaurants to an empty object to account for when a user presses the back button. Prior to doing so, when a user selected new criteria and pressed enter, they saw the old message / restaurant until the new results loaded.
       vm.restaurants = {}
       vm.currentRestaurant = 0;
-      // debugger;
     }
 
     vm.category = 'mexican';
@@ -102,36 +100,31 @@
         }, 500);
 
         console.log('Your current position is ' + vm.pos.latitude + ', ' + vm.pos.longitude)
-        // if (vm.pos.latitude && vm.pos.longitude) {
-        //   vm.nextPhase();
-        // }
-        // return vm.formPhase;
 
-      // Yelp
+        uiGmapGoogleMapApi.then(function(maps) {
+          vm.userLocationMap = {
+            center: {
+              latitude: vm.pos.latitude,
+              longitude: vm.pos.longitude
+            },
+            zoom: areaZoom
+          };
+          vm.options = {
+            scrollwheel: false
+          };
 
-      uiGmapGoogleMapApi.then(function(maps) {
-        vm.userLocationMap = {
-          center: {
-            latitude: vm.pos.latitude,
-            longitude: vm.pos.longitude
-          },
-          zoom: areaZoom
-        };
-        vm.options = {
-          scrollwheel: false
-        };
+          vm.userLocation = [
+            {
+              id: 1,
+              latitude: vm.pos.latitude,
+              longitude: vm.pos.longitude,
+              title: 'user location'
+            }
+          ];
+        });
 
-        vm.userLocation = [
-          { id: 1,
-          latitude: vm.pos.latitude,
-          longitude: vm.pos.longitude,
-          title: 'user location'
-          }
-        ];
       });
-
-    });
-  }
+    }
 
     init();
 
@@ -151,7 +144,6 @@
         .then(function(restaurants){
           vm.formPhase++;
           vm.restaurants = restaurants;
-          // Gets favorites so "Save to Favorites" / "Saved" button is always correct. Prior to this, I was only getting restaurants after a user saves something to their favorites or looks at their favorites.
           if (restaurants.data.length === 0) {
             console.log('Your search didn\'t return any restaurants. Please try searching again!');
           } else {
@@ -203,7 +195,6 @@
 
               vm.directionsService.route(vm.route, function(response, status){
                 if (status === google.maps.DirectionsStatus.OK) {
-                  // debugger;
                   vm.directionsDisplay.setDirections(response);
                   vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
                 } else {
@@ -213,7 +204,6 @@
 
             });
           }
-          // then get restaurant
         }, function(data, status, headers, config){
           console.log('Error getting restaurants.');
         });
@@ -233,8 +223,6 @@
     }
 
     function redrawRoute(){
-      console.log(vm.currentRestaurant);
-;
       vm.route = {
         origin: new vm.maps.LatLng(
           vm.pos.latitude,
@@ -249,7 +237,6 @@
 
       vm.directionsService.route(vm.route, function(response, status){
         if (status === google.maps.DirectionsStatus.OK) {
-          // debugger;
           vm.directionsDisplay.setDirections(response);
           vm.directionsDisplay.setMap(vm.directionsMap.control.getGMap());
         } else {
@@ -266,7 +253,7 @@
       }
     };
 
-  // Decrements phase of restaurant finding process
+    // Decrements phase of restaurant finding process
     vm.previousRestaurant = function(){
       vm.currentRestaurant--;
       redrawRoute();
@@ -274,7 +261,7 @@
 
     vm.saveToFavorites = function(){
       favoritesFactory.saveToFavorites(vm.restaurants[vm.currentRestaurant])
-      // Gets favorites so "Save to Favorites" button is dynamically updated
+        // Gets favorites so "Save to Favorites" button is dynamically updated
         .success(function(){
           favoritesFactory.getFavorites();
         })
@@ -285,7 +272,6 @@
 
 }
 
-    // uiGmapGoogleMapApi.
   FindRestaurantController.$inject = ['findRestaurantFactory', 'favoritesFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi', 'usSpinnerService'];
 
   angular.module('tastemakerApp').controller('findRestaurantController', FindRestaurantController);
