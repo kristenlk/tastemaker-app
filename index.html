@@ -1,113 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="tastemakerApp">
 
-<head>
+  <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>Tastemaker | Let's find your dinner</title>
+    <title>Tastemaker | Let's find your dinner</title>
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-  <!-- Custom CSS -->
-  <link href="app/styles/css/main.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="app/styles/css/main.css" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Enriqueta:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Enriqueta:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
-</head>
+  </head>
 
-<body>
+  <body>
 
-  <!-- Navigation -->
-  <nav ng-controller="navbarController as navCtrl" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#/">T&nbsp;A&nbsp;S&nbsp;T&nbsp;E&nbsp;M&nbsp;A&nbsp;K&nbsp;E&nbsp;R</a>
+    <!-- Navigation -->
+    <nav ng-controller="navbarController as navCtrl" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/">T&nbsp;A&nbsp;S&nbsp;T&nbsp;E&nbsp;M&nbsp;A&nbsp;K&nbsp;E&nbsp;R</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li>
+              <a ng-if="!navCtrl.isLoggedIn()" href="#/login">Log In</a>
+            </li>
+            <li>
+              <a ng-if="!navCtrl.isLoggedIn()" href="#/signup">Sign Up</a>
+            </li>
+            <li>
+              <a ng-if="navCtrl.isLoggedIn()" href="#/account">My Account</a>
+            </li>
+            <li>
+              <a ng-if="navCtrl.isLoggedIn()" href="#/account/favorites">My Favorites</a>
+            </li>
+            <li>
+              <a ng-if="navCtrl.isLoggedIn()" href="#/account/logout" ng-click="navCtrl.logout()">Log Out</a>
+            </li>
+          </ul>
+        </div>
       </div>
+    </nav>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li>
-            <a ng-if="!navCtrl.isLoggedIn()" href="#/login">Log In</a>
-          </li>
-          <li>
-            <a ng-if="!navCtrl.isLoggedIn()" href="#/signup">Sign Up</a>
-          </li>
-          <li>
-            <a ng-if="navCtrl.isLoggedIn()" href="#/account">My Account</a>
-          </li>
-          <li>
-            <a ng-if="navCtrl.isLoggedIn()" href="#/account/favorites">My Favorites</a>
-          </li>
-          <li>
-            <a ng-if="navCtrl.isLoggedIn()" href="#/account/logout" ng-click="navCtrl.logout()">Log Out</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <!--   <div class="col-md-12 col-md-offset-4"> -->
+      <div ng-view></div>
+  <!--   </div> -->
 
-<!--   <div class="col-md-12 col-md-offset-4"> -->
-    <div ng-view></div>
-<!--   </div> -->
+    <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
 
-  <!-- jQuery -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-  <!-- Bootstrap Core JavaScript -->
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- SimpleStorage -->
+    <script src="bower_components/simpleStorage/simpleStorage.js" type="text/javascript"></script>
 
-  <!-- SimpleStorage -->
-  <script src="bower_components/simpleStorage/simpleStorage.js" type="text/javascript"></script>
+    <!-- AngularJS -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-loading-spinner/angular-loading-spinner.js"></script>
 
-  <!-- AngularJS -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-messages/angular-messages.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-  <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
-  <script src="bower_components/spin.js/spin.js"></script>
-  <script src="bower_components/angular-loading-spinner/angular-loading-spinner.js"></script>
+    <!-- App -->
+    <script src='app/scripts/app.js'></script>
 
-  <!-- App -->
-  <script src='app/scripts/app.js'></script>
+    <!-- Services -->
+    <script src='app/scripts/services/values.js'></script>
 
-  <!-- Services -->
-  <script src='app/scripts/services/values.js'></script>
+    <!-- Factories -->
+    <script src='app/scripts/services/findRestaurantFactory.js'></script>
+    <script src='app/scripts/services/authFactory.js'></script>
+    <script src='app/scripts/services/favoritesFactory.js'></script>
 
-  <!-- Factories -->
-  <script src='app/scripts/services/findRestaurantFactory.js'></script>
-  <script src='app/scripts/services/authFactory.js'></script>
-  <script src='app/scripts/services/favoritesFactory.js'></script>
+    <!-- Controllers -->
+    <script src='app/scripts/controllers/findRestaurantController.js'></script>
+    <script src='app/scripts/controllers/loginController.js'></script>
+    <script src='app/scripts/controllers/accountController.js'></script>
+    <script src='app/scripts/controllers/favoritesController.js'></script>
+    <script src='app/scripts/controllers/navbarController.js'></script>
+    <script src='app/scripts/controllers/signupController.js'></script>
 
-  <!-- Controllers -->
-  <script src='app/scripts/controllers/findRestaurantController.js'></script>
-  <script src='app/scripts/controllers/loginController.js'></script>
-  <script src='app/scripts/controllers/accountController.js'></script>
-  <script src='app/scripts/controllers/favoritesController.js'></script>
-  <script src='app/scripts/controllers/navbarController.js'></script>
-  <script src='app/scripts/controllers/signupController.js'></script>
+    <!-- Angular Google Maps stuff -->
+    <script src='bower_components/lodash/lodash.min.js'></script>
+    <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
+    <script src='bower_components/angular-google-maps/angular-simple-logger/dist/index.js'></script>
 
-  <!-- Angular Google Maps stuff -->
-  <script src='bower_components/lodash/lodash.min.js'></script>
-  <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
-  <script src='bower_components/angular-google-maps/angular-simple-logger/dist/index.js'></script>
-
-
-</body>
+  </body>
 
 </html>

@@ -113,12 +113,15 @@ h4 {
     background-color: transparent;
 }
 
-.button.btn-default:hover,
-.button.btn-default:focus {
+.button.btn-default:hover {
     border: 2px solid #101010;
     outline:none;
     color: #FFF;
     background-color: #101010;
+}
+
+.button.btn-default:focus {
+    outline:0;
 }
 
 /* Setting up alignment */

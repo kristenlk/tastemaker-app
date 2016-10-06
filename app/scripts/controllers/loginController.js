@@ -2,7 +2,7 @@
 
 (function loginControllerIIFE() {
 
-  var LoginController = function(authFactory, favoritesFactory, appSettings) {
+  var LoginController = function(authFactory, favoritesFactory, appSettings, usSpinnerService) {
     var vm = this;
     vm.loginForm = {};
     vm.loginForm.email = '';
@@ -13,21 +13,23 @@
     vm.loginErrors = false;
 
     vm.login = function(){
-      authFactory.login(vm.loginForm).then(function(response){
-        // Checking if factory returned an error.
-        // Don't need to check what type of error it is, since I'm just going to show one generic error.
+      vm.loggingIn = true;
+      authFactory.login(vm.loginForm).then(function(response) {
         authFactory.getCurrentUser();
-      }, function() {
+        vm.loginErrors = false;
+      }).catch(function(error) {
         vm.loginErrors = true;
+      }).finally(function() {
+        vm.loggingIn = false;
       });
     }
 
     vm.clearErrors = function(){
-      vm.loginErrors = false;
+
     }
   };
 
-  LoginController.$inject = ['authFactory', 'favoritesFactory', 'appSettings'];
+  LoginController.$inject = ['authFactory', 'favoritesFactory', 'appSettings', 'usSpinnerService'];
 
   angular.module('tastemakerApp').controller('loginController', LoginController);
 

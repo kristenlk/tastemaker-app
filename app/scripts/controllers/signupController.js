@@ -1,43 +1,39 @@
 'use strict';
 
 (function signupControllerIIFE() {
-  var SignupController = function(authFactory, appSettings) {
+  var SignupController = function(authFactory, appSettings, usSpinnerService) {
     var vm = this;
     vm.signupForm = {};
     vm.signupForm.email = '';
     vm.signupForm.password = '';
     vm.currentUser = authFactory.currentUser;
-    // Error if non-unique email is entered
     vm.notUnique = false;
     vm.miscSignupErrors = false;
 
     vm.signup = function(){
+      vm.signingUp = true;
       authFactory.signup(vm.signupForm)
         .then(function(response){
-          console.log(response);
-          // Checking if response has an error in it. Workaround for error handling not functioning as I expected.
-          // If there is an error, iterate through errors. Check what type of error it is.
-          if (response.data.error.errors) {
-            response.data.error.errors.forEach(function(error){
+          authFactory.getCurrentUser();
+        }).catch(function(errors) {
+          if (errors.data && errors.data.errors) {
+            errors.data.errors.forEach(function(error){
               if (error.message === "email must be unique") {
                 return vm.notUnique = true;
-              } else if (error.message) {
+              } else {
                 return vm.miscSignupErrors = true;
               }
             });
+          } else {
+            return vm.miscSignupErrors = true;
           }
-
-          authFactory.getCurrentUser();
-        })
-    }
-
-    vm.clearErrors = function(){
-      vm.notUnique = false;
-      vm.miscSignupErrors = false;
+        }).finally(function() {
+          vm.signingUp = false;
+        });
     }
   }
 
-  SignupController.$inject = ['authFactory', 'appSettings'];
+  SignupController.$inject = ['authFactory', 'appSettings', 'usSpinnerService'];
 
   angular.module('tastemakerApp').controller('signupController', SignupController);
 

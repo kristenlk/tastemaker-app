@@ -5,23 +5,23 @@
         <div class="outer-body">
           <h3>Sign Up</h3>
 
-          <form name="signupForm" novalidate class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+          <form name="signupForm" ng-submit="signupForm.$valid && signupCtrl.signup()" class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1" novalidate>
 
-            <div class="form-group" ng-class="{ 'has-error': signupForm.email.$touched && signupForm.email.$invalid }">
+            <div class="form-group" ng-class="{ 'has-error': signupForm.$submitted && signupForm.email.$invalid }">
               <label><span class="labels">Email</span></label>
               <input type="email" name="email" class="form-control"
                 ng-model="signupCtrl.signupForm.email"
                 required
                 >
 
-              <div class="help-block" ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
+              <div class="help-block" ng-messages="signupForm.email.$error" ng-show="signupForm.$submitted">
                 <span ng-message="required">Please enter an email address.</span>
                 <span ng-message="email">Please enter a valid email.</span>
               </div>
 
             </div>
 
-            <div class="form-group" ng-class="{ 'has-error': signupForm.password.$touched && signupForm.password.$invalid }">
+            <div class="form-group" ng-class="{ 'has-error': signupForm.$submitted && signupForm.password.$invalid }">
               <label><span class="labels">Password</span></label>
               <input type="password" name="password" class="form-control"
                 ng-model="signupCtrl.signupForm.password"
@@ -29,7 +29,7 @@
                 required
                 >
 
-              <div class="help-block" ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
+              <div class="help-block" ng-messages="signupForm.password.$error" ng-show="signupForm.$submitted">
                 <span ng-message="required">Please enter a password.</span>
                 <span ng-message="minlength">Your password must contain at least 6 characters.</p>
               </div>
@@ -37,19 +37,21 @@
             </div>
 
             <div class="form-group">
-              <a class="button btn btn-default" role="button" type="submit" ng-click="signupCtrl.signup(); signupCtrl.clearErrors()">
+              <button type="submit" class="button btn btn-default">
                 Sign Up
-              </a>
+              </button>
             </div>
 
             <div class="alert alert-danger alert-dismissible" ng-show="signupCtrl.notUnique">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <span><i class="icon fa fa-ban"></i>This email is already registered with Tastemaker. Want to <a href="#/login">log in</a>?</span>
+              <span><i class="icon fa fa-ban"></i>This email is already registered with Tastemaker.</span>
             </div>
 
             <div class="alert alert-danger alert-dismissible" ng-show="signupCtrl.miscSignupErrors">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <span><i class="icon fa fa-ban"></i>There was a problem with the email address or password you entered. Please try again.</span>
+            </div>
+
+            <div class="spinner-container" ng-show="signupCtrl.signingUp" style="position:relative; margin-top:100px;">
+              <span us-spinner="{radius:30, width:8, length: 16, color: '#FFF'}"></span>
             </div>
         </div>
       </div>

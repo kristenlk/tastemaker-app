@@ -3,7 +3,7 @@
     var vm = this;
 
     vm.isLoggedIn = function(){
-      return simpleStorage.get("loggedIn") !== undefined;
+      return simpleStorage.get("loggedIn");
     }
 
     vm.logout = function(){
