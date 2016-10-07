@@ -151,15 +151,12 @@
             if (vm.restaurants.businesses.length === 0) {
               return;
             }
+
             vm.restaurants = vm.restaurants.businesses.sort(function(a, b){
-              var ratingA = a.rating;
-              var ratingB = b.rating;
-              if (ratingA < ratingB) {
-                return 1;
-              }
-              if (ratingA > ratingB) {
-                return -1;
-              }
+              if (a.rating > b.rating) return -1;
+              if (a.rating < b.rating) return 1;
+              if (a.review_count > b.review_count) return -1;
+              if (a.review_count < b.review_count) return 1;
               return 0;
             });
 
@@ -269,7 +266,6 @@
           console.log('Error getting favorite.');
         });;
     }
-
 }
 
   FindRestaurantController.$inject = ['findRestaurantFactory', 'favoritesFactory', 'appSettings', '$timeout', 'uiGmapGoogleMapApi', 'usSpinnerService'];
